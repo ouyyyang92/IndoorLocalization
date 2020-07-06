@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.myapplication.R;
-
+//try commit
 public class StartActivity extends AppCompatActivity {
     private Button btn_skip;
     private ImageView iv;
