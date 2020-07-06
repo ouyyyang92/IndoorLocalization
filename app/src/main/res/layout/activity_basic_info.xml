@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:text="下一步"
+        android:drawableRight="@drawable/ic_next"
+        android:background="@drawable/bg_btn_apparent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/Welcome"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="80dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:text="头像"
+                />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:text="性别" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:text="生日" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:text="地区" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:paddingLeft="30dp"
+            android:paddingTop="25dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_head_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="88dp"
+                android:background="@drawable/bg_btn_circle"
+                android:text="+"
+                android:textSize="30sp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup_gender_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_head_icon"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_male"
+                    android:button="@drawable/ic_male" />
+
+                <RadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/ic_female"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/selector_female"/>
+
+                <RadioButton
+                    android:id="@+id/rb_other"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/ic_unknown"
+                    android:background="@drawable/selector_unknown"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editText_year"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_below="@id/radioGroup_gender_select"
+                android:layout_marginTop="25dp"
+                android:maxLength="4"
+                android:text="2000" />
+
+            <EditText
+                android:id="@+id/editText_month"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_below="@id/radioGroup_gender_select"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="60dp"
+                android:textAlignment="center"
+                android:text="01"
+                android:maxLength="2"
+                android:gravity="center_horizontal" />
+
+            <EditText
+                android:id="@+id/editText_day"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_below="@id/radioGroup_gender_select"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="100dp"
+                android:textAlignment="center"
+                android:text="01"
+                android:maxLength="2"
+                android:gravity="center_horizontal" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Welcome"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_below="@id/button_next"
+        android:paddingLeft="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:fontFamily="monospace"
+            android:textColor="#FF9E9E"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="补充你的"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="个人信息"
+            android:textSize="60sp"/>
+    </LinearLayout>
+
+</RelativeLayout>
