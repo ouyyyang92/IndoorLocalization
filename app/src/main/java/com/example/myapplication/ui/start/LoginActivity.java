@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.cilent.Client;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
+
+import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         FindView();
@@ -63,13 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean Login() {
-        phone = ed_phone.getText().toString();
-        password = ed_password.getText().toString();
-        if (phone.equals("123456")) {
-            if (password.equals("123456")) {
-                return true;
-            }
-        }
+
         return true;
     }
 
@@ -84,6 +86,13 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.button_login:
+
+                    phone = ed_phone.getText().toString();
+                    password = ed_password.getText().toString();
+                    Client client = new Client();
+                    String str = phone + " " + password;
+                    client.send(str,2);
+
                     //跳转到主页
                     if (Login()) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
