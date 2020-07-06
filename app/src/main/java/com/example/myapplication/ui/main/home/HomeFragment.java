@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,7 +29,8 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button btn_my_page;
-
+    private Button btn_information;
+    private View view;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -64,8 +66,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_home, null);
+        btn_information= getActivity().findViewById(R.id.btn_information);
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button button = (Button) getActivity().findViewById(R.id.btn_information);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), MyPageActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+    }
 
 }
