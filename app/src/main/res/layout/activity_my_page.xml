@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.home.MyPageActivity"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_previous" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <!--账号-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/head_image"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:src="@drawable/ic_reading" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aaaaaa"
+                android:textColor="#000000"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_centerHorizontal="true"
+                android:drawableTop="@drawable/ic_male"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="100dp">
+
+            <TextView
+                android:id="@+id/textView_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30dp"
+                android:drawableLeft="@drawable/ic_phone"
+                android:text="hahaha"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30dp"
+                android:drawableLeft="@drawable/ic_birth"
+                android:text="hahaha"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView_hobby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30dp"
+                android:drawableLeft="@drawable/ic_hobby"
+                android:layout_marginTop="20dp"
+                android:text="hahaha"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30dp"
+                android:drawableLeft="@drawable/ic_location"
+                android:layout_marginTop="20dp"
+                android:text="hahaha"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="30dp"
+                android:drawableLeft="@drawable/ic_email"
+                android:layout_marginTop="20dp"
+                android:text="hahaha"
+                android:textSize="22sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

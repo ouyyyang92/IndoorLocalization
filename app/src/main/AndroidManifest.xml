@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.start.findPassword.FindPasswordActivity1"/>
+        <activity android:name=".ui.main.home.MyPageActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.start.findPassword.FindPasswordActivity1" />
         <activity android:name=".ui.start.leading.HobbiesSelectionActivity" />
         <activity android:name=".ui.start.LoginActivity" />
         <activity android:name=".ui.start.SignInActivity" />

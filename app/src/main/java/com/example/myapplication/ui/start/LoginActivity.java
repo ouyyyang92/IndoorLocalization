@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.MainActivity;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     private void toAnotherActivity(String destination) {
@@ -86,12 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                     //跳转到主页
                     if (Login()) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        /*
+
                         Intent intent1 = new Intent();
                         intent1.putExtra("userId", userId);
-                        intent1.setClass(LoginActivity.this, SignInActivity.class);
+                        intent1.setClass(LoginActivity.this, MainActivity.class);
                         startActivity(intent1);
-                         */
                         finish();
                     } else {
                         ed_password.setText("");
