@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         btn_map = findViewById(R.id.button_map);
         btn_contacts = findViewById(R.id.button_contacts);
         btn_home = findViewById(R.id.button_me);
-        button_dingwei = findViewById(R.id.button_dingwei);
     }
 
     private void SetListener() {
@@ -141,4 +140,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public Person GetMe(){
+        return this.me;
+    }
 }
