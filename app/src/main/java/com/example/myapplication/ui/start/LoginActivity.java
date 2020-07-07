@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView iv_eye_closed;
     private ImageView iv_eye_open;  //图片
 
+    private String personinformation = "";
     private String phone = "";
     private String password = "";
     private int userId;
@@ -70,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_view.setOnClickListener(onClickListener);
         btn_signIn.setOnClickListener(onClickListener);
     }
-
     private boolean Login() throws IOException, ClassNotFoundException {
         //获取手机号、密码文本
         phone = ed_phone.getText().toString();
@@ -79,12 +79,14 @@ public class LoginActivity extends AppCompatActivity {
         Client client = new Client();
         String str = phone + " " + password;
         String str1 = client.send(str);
-        String[] strings = str1.split(" ");
+        String[] strings = str1.split(",");
         String message = "";
         if (strings[0].equals("100")) {
             message = "登录成功";
             ShowInfoByToast(message);
-            String personString = strings[1];
+            personinformation = strings[1];
+            System.out.println(personinformation);
+//            GetInformationBundle(personString);
             return true;
         } else if (strings[0].equals("101")) {
             message = "用户名不存在";
@@ -110,9 +112,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private Bundle GetInformationBundle(String info) {
         //将字符串拆分并按键-值形式放入bundle
-        String[] infos = info.split(",");
-
+        String[] infos = info.split(" ");
         Bundle bundle = new Bundle();
+        for (int i = 0;i<8;i++){
+            System.out.println(infos[i]);
+        }
         bundle.putString("phone", infos[0]);
         bundle.putString("username", infos[1]);
         bundle.putString("address", infos[2]);
@@ -121,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("birth", infos[5]);
         bundle.putString("hobbies", infos[6]);
         bundle.putString("icon", infos[7]);
+
         return bundle;
     }
 
@@ -136,13 +141,13 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent intent1 = new Intent();
                             String information = "";    //服务器发送来的消息
-                            intent1.putExtras(GetInformationBundle(information));
+                            intent1.putExtras(GetInformationBundle(personinformation));
                             intent1.setClass(LoginActivity.this, MainActivity.class);
                             startActivity(intent1);
                             finish();   //结束掉该页面
                         } else {
                             ed_password.setText("");
-                            Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
+//                          Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

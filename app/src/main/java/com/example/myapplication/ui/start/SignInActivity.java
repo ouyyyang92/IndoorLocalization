@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.cilent.Client;
 import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.start.leading.BasicInfoActivity;
 import com.example.myapplication.R;
@@ -33,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private ImageView[] iv_error = new ImageView[4];//对错图标
     private boolean flag = true;
     private EventHandler eventHandler;
+    private boolean flag2 = true;
 
     private String phone = "";
     private String username = "";
@@ -170,8 +172,17 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void SignIn() {
-        if(judCord())
+        if(judCord()){
             SMSSDK.submitVerificationCode("86",phone,code);
+            String string = phone + " " + password + " " + username;
+            System.out.println(string);
+            String string1 = Client.send(string);
+            System.out.println(string1);
+            if (string1.equals("202") ){
+//                ShowInfoByToast("用户名已被注册");
+                flag2 = false;
+            }
+        }
         flag=false;
     }
 
@@ -191,6 +202,10 @@ public class SignInActivity extends AppCompatActivity {
                 return false;
             }
         }
+
+//        Client.send(string);
+
+
         //如果手机号已被注册，注册失败
         //                ShowInfoByToast("手机号已被注册");
 
@@ -335,12 +350,18 @@ public class SignInActivity extends AppCompatActivity {
             {
 
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    ShowInfoByToast("注册成功！");
-                    Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
-                    //创建新Activity的同时清空站内所有Activities
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtras(CollectData());
-                    startActivity(intent);
+                    if (flag2){
+                        ShowInfoByToast("注册成功！");
+                        Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
+                        //创建新Activity的同时清空站内所有Activities
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtras(CollectData());
+                        startActivity(intent);
+                    }
+                    else {
+                        ShowInfoByToast("用户名已注册");
+                    }
+
                 }
             }
             else
