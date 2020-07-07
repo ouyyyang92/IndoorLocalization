@@ -2,12 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 
 MobSDK {
-    appKey "2ff929edf2065"
-    appSecret "9edeca57f28a9cc94d67c7625f207225"
+    appKey "2feee7be0ab53"
+    appSecret "000c356b328e389dc26f26b2d79f2362"
     SMSSDK {}
 }
 
 android {
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java/com.example/suanfa']
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 

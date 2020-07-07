@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         password = ed_password.getText().toString();
 
         Client client = new Client();
-        String str = phone + " " + password;
+        String str = "1 " + phone + " " + password;
         String str1 = client.send(str);
         String[] strings = str1.split(",");
         String message = "";

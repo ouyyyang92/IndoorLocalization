@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical">
-
+    <Button
+        android:id="@+id/button_dingwei"
+        android:layout_width="146dp"
+        android:layout_height="76dp"
+        android:text="定位" />
     <FrameLayout
         android:id="@+id/fl_main"
         android:layout_width="match_parent"
@@ -50,6 +54,7 @@
             android:textSize="20sp"
             android:background="@drawable/bg_btn_apparent"
             android:drawableTop="@drawable/ic_home" />
+
     </LinearLayout>
 
 

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.cilent.Client;
+import com.example.cilent.setloca;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.home.MyPageActivity;
+import com.example.suanfa.setloca2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +29,12 @@ public class MapFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ImageView iv_location;
+    private int currentX = 0;
+    private int currentY = 0;
+    private int newX,newY;
 
+    private setloca wifi;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -62,5 +75,47 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_map, container, false);
+
     }
+    public void InitLocation(){
+        TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
+                    translateAnimation.setDuration(100);
+                    iv_location.setAnimation(translateAnimation);
+                    translateAnimation.start();
+    }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        iv_location= getActivity().findViewById(R.id.imageView_location);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                int num = 0;
+//                while(num < 10){
+//                    num++;
+//                    newX = currentX + (100 - num) / 10;
+//                    newY = currentY - (100 - num) / 10;
+//                    TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
+//                    translateAnimation.setDuration(100);
+//                    iv_location.setAnimation(translateAnimation);
+//                    translateAnimation.start();
+//                    currentX = newX;
+//                    currentY = newY;
+//                    try {
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
+
+    }
+
 }
