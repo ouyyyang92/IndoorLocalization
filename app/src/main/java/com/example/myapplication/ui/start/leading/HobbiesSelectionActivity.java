@@ -85,7 +85,6 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
         Log.d("birth",bundle.getString("birth"));
         Log.d("location",bundle.getString("location"));
         Log.d("hobbies",Hobbies_toString());
-
     }
 
     private String Hobbies_toString() {

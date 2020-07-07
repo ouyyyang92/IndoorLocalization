@@ -72,8 +72,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean Login() throws IOException, ClassNotFoundException {
+        //获取手机号、密码文本
         phone = ed_phone.getText().toString();
         password = ed_password.getText().toString();
+
         Client client = new Client();
         String str = phone + " " + password;
         String str1 = client.send(str);
@@ -95,13 +97,31 @@ public class LoginActivity extends AppCompatActivity {
 //            return true;
 //        else return false;
     }
+
     private void ShowInfoByToast(String info) {
         Toast.makeText(LoginActivity.this, info, Toast.LENGTH_SHORT).show();
     }
+
     private void toAnotherActivity(String destination) {
         Intent intent = new Intent();
         intent.setClassName(LoginActivity.this, destination);
         startActivity(intent);
+    }
+
+    private Bundle GetInformationBundle(String info) {
+        //将字符串拆分并按键-值形式放入bundle
+        String[] infos = info.split(",");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("phone", infos[0]);
+        bundle.putString("username", infos[1]);
+        bundle.putString("address", infos[2]);
+        bundle.putString("email", infos[3]);
+        bundle.putInt("gender", Integer.parseInt(infos[4]));
+        bundle.putString("birth", infos[5]);
+        bundle.putString("hobbies", infos[6]);
+        bundle.putString("icon", infos[7]);
+        return bundle;
     }
 
     private class OnClickListener implements View.OnClickListener {
@@ -109,17 +129,17 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.button_login:
-
                     //跳转到主页
                     try {
                         if (Login()) {
                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 
                             Intent intent1 = new Intent();
-                            intent1.putExtra("userId", userId);
+                            String information = "";    //服务器发送来的消息
+                            intent1.putExtras(GetInformationBundle(information));
                             intent1.setClass(LoginActivity.this, MainActivity.class);
                             startActivity(intent1);
-                            finish();
+                            finish();   //结束掉该页面
                         } else {
                             ed_password.setText("");
                             Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
@@ -135,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                     toAnotherActivity("com.example.myapplication.ui.start.SignInActivity");
                     break;
                 case R.id.button_view:
+                    //查看/隐藏密码
                     if (iv_eye_closed.getVisibility() == View.VISIBLE) {//当密码不可见时
                         iv_eye_closed.setVisibility(View.INVISIBLE);
                         iv_eye_open.setVisibility(View.VISIBLE);    //变换图片
@@ -146,6 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.button_clean:
+                    //清空手机号
                     ed_phone.setText("");
                     break;
                 case R.id.button_findPassword:
@@ -154,4 +176,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 }
