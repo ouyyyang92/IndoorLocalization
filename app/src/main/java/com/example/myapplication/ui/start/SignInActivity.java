@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.start.leading.BasicInfoActivity;
 import com.example.myapplication.R;
+
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 
 public class SignInActivity extends AppCompatActivity {
     private Button btn_send_code;
@@ -24,12 +31,14 @@ public class SignInActivity extends AppCompatActivity {
     private EditText ed_code;   //输入框
     private ImageView[] iv_right = new ImageView[4];
     private ImageView[] iv_error = new ImageView[4];//对错图标
+    private boolean flag = true;
+    private EventHandler eventHandler;
 
     private String phone = "";
     private String username = "";
     private String password = "";
     private String password2 = "1";
-    private int code = 0;           //输入框的内容
+    private String code = "";           //输入框的内容
     private boolean[] correct = new boolean[4]; //每栏信息是否正确
 
     @Override
@@ -39,6 +48,23 @@ public class SignInActivity extends AppCompatActivity {
         FindView();
         SetListeners();
         for (int i = 0; i < 4; i++) correct[i] = false;
+
+        eventHandler = new EventHandler(){
+            public void afterEvent(int event,int result,Object data){
+                Message msg = new Message();
+                msg.arg1=event;
+                msg.arg2=result;
+                msg.obj=data;
+                handler.sendMessage(msg);
+            }
+        };
+
+        SMSSDK.registerEventHandler(eventHandler);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        SMSSDK.unregisterEventHandler(eventHandler);
     }
 
     //寻找对应控件
@@ -67,7 +93,15 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocus();
-                ShowInfoByToast("验证码已发送！");
+                if (CheckRegistrable()){
+                    ShowInfoByToast("验证码已发送！");
+                    if (judPhone())//去掉左右空格获取字符串
+                    {
+                        SMSSDK.getVerificationCode("86", phone);
+                        ed_code.requestFocus();
+                    }
+                }
+
             }
         });
 
@@ -75,19 +109,12 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocus();
-                //if(CheckRegistrable()){
-                ShowInfoByToast("注册成功！");
-                SignIn();
-                Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
-                //创建新Activity的同时清空站内所有Activities
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtras(CollectData());
-                startActivity(intent);
-                /*}
-                else{
+                if(CheckRegistrable()) {
+                    SignIn();
+                }
+                else {
                     ShowInfoByToast("注册失败");
                 }
-                 */
             }
         });
 
@@ -125,7 +152,6 @@ public class SignInActivity extends AppCompatActivity {
                 if (!b) {
                     password = ed_password.getText().toString();
                     ChangeIcon(2, CheckPassword());
-                    CheckPassword();
                     if (iv_right[3].getVisibility() != iv_error[3].getVisibility())
                         ChangeIcon(3, CheckSecondPassword());
                 }
@@ -137,13 +163,16 @@ public class SignInActivity extends AppCompatActivity {
                 if (!b) {
                     password2 = ed_password2.getText().toString();
                     ChangeIcon(3, CheckSecondPassword());
+                    ChangeIcon(2, CheckPassword());
                 }
             }
         });
     }
 
     private void SignIn() {
-
+        if(judCord())
+            SMSSDK.submitVerificationCode("86",phone,code);
+        flag=false;
     }
 
     private Bundle CollectData(){
@@ -166,11 +195,11 @@ public class SignInActivity extends AppCompatActivity {
         //                ShowInfoByToast("手机号已被注册");
 
         //验证码错误
-        code = Integer.parseInt(ed_code.getText().toString());
-        if (code != 123456) {
-            ShowInfoByToast("验证码错误");
-            return false;
-        }
+        //code = Integer.parseInt(ed_code.getText().toString());
+        //if (code != 123456) {
+        //   ShowInfoByToast("验证码错误");
+        //   return false;
+       // }
         return true;
     }
 
@@ -242,4 +271,91 @@ public class SignInActivity extends AppCompatActivity {
         ed_password2.clearFocus();
         ed_code.clearFocus();
     }
+
+    private boolean judPhone()
+    {
+        if(TextUtils.isEmpty(ed_phone.getText().toString().trim()))
+        {
+            Toast.makeText(this,"请输入您的电话号码",Toast.LENGTH_LONG).show();
+            ed_phone.requestFocus();
+            return false;
+        }
+        else if(ed_phone.getText().toString().trim().length()!=11)
+        {
+
+            Toast.makeText(this,"您的电话号码位数不正确",Toast.LENGTH_LONG).show();
+            ed_phone.requestFocus();
+            return false;
+        }
+        else
+        {
+            phone=ed_phone.getText().toString().trim();
+            String num="[1][345678]\\d{9}";
+            if(phone.matches(num))
+                return true;
+            else
+            {
+                Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+    }
+
+    private boolean judCord()
+    {
+        judPhone();
+        if(TextUtils.isEmpty(ed_code.getText().toString().trim()))
+        {
+            Toast.makeText(this,"请输入您的验证码",Toast.LENGTH_LONG).show();
+            ed_code.requestFocus();
+            return false;
+        }
+        else if(ed_code.getText().toString().trim().length()!=6)
+        {
+            Toast.makeText(this,"您的验证码位数不正确",Toast.LENGTH_LONG).show();
+            ed_code.requestFocus();
+
+            return false;
+        }
+        else
+        {
+            code=ed_code.getText().toString().trim();
+            return true;
+        }
+
+    }
+
+    Handler handler  = new Handler()
+    {
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int event=msg.arg1;
+            int result=msg.arg2;
+            if(result==SMSSDK.RESULT_COMPLETE)
+            {
+
+                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                    ShowInfoByToast("注册成功！");
+                    Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
+                    //创建新Activity的同时清空站内所有Activities
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtras(CollectData());
+                    startActivity(intent);
+                }
+            }
+            else
+            {
+                if(flag)
+                {
+                    btn_send_code.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(),"验证码获取失败请重新获取", Toast.LENGTH_LONG).show();
+                    ed_phone.requestFocus();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"验证码输入错误", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    };
 }
