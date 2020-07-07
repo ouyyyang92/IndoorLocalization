@@ -18,6 +18,8 @@ import com.example.myapplication.ui.main.MainActivity;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 
 public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
@@ -56,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         ed_password = findViewById(R.id.editText_password);
         iv_eye_closed = findViewById(R.id.imageView_eye_closed);
         iv_eye_open = findViewById(R.id.imageView_eye_open);
-
         btn_findPassword.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
         btn_signIn.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
@@ -70,11 +71,33 @@ public class LoginActivity extends AppCompatActivity {
         btn_signIn.setOnClickListener(onClickListener);
     }
 
-    private boolean Login() {
-
-        return true;
+    private boolean Login() throws IOException, ClassNotFoundException {
+        phone = ed_phone.getText().toString();
+        password = ed_password.getText().toString();
+        Client client = new Client();
+        String str = phone + " " + password;
+        String str1 = client.send(str);
+        String[] strings = str1.split(" ");
+        String message = "";
+        if (strings[0].equals("100")) {
+            message = "登录成功";
+            ShowInfoByToast(message);
+            String personString = strings[1];
+            return true;
+        } else if (strings[0].equals("101")) {
+            message = "用户名不存在";
+        } else if (strings[0].equals("102")) {
+            message = "密码错误";
+        }
+        ShowInfoByToast(message);
+        return false;
+//        if(client.send(str).equals("1"))
+//            return true;
+//        else return false;
     }
-
+    private void ShowInfoByToast(String info) {
+        Toast.makeText(LoginActivity.this, info, Toast.LENGTH_SHORT).show();
+    }
     private void toAnotherActivity(String destination) {
         Intent intent = new Intent();
         intent.setClassName(LoginActivity.this, destination);
@@ -87,24 +110,24 @@ public class LoginActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.button_login:
 
-                    phone = ed_phone.getText().toString();
-                    password = ed_password.getText().toString();
-                    Client client = new Client();
-                    String str = phone + " " + password;
-                    client.send(str,2);
-
                     //跳转到主页
-                    if (Login()) {
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    try {
+                        if (Login()) {
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 
-                        Intent intent1 = new Intent();
-                        intent1.putExtra("userId", userId);
-                        intent1.setClass(LoginActivity.this, MainActivity.class);
-                        startActivity(intent1);
-                        finish();
-                    } else {
-                        ed_password.setText("");
-                        Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
+                            Intent intent1 = new Intent();
+                            intent1.putExtra("userId", userId);
+                            intent1.setClass(LoginActivity.this, MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                        } else {
+                            ed_password.setText("");
+                            Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case R.id.button_signIn:
