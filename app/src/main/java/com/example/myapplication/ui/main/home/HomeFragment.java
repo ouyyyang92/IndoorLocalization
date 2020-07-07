@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.data.Person;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     private Button btn_my_page;
     private Button btn_information;
+    private MainActivity parent;
     private View view;
     public HomeFragment() {
         // Required empty public constructor
@@ -66,23 +69,31 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_home, null);
-        btn_information= getActivity().findViewById(R.id.btn_information);
+
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button button = (Button) getActivity().findViewById(R.id.btn_information);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        parent = (MainActivity) getActivity();
+        assert parent != null;
+        btn_information= parent.findViewById(R.id.btn_information);
+        btn_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
                 intent.setClass(getActivity(), MyPageActivity.class);
+                Bundle bundle = new Bundle();
+                Person me = parent.GetMe();
+                bundle.putString("username",me.getName());
+                bundle.putString("phone",me.getPhone());
+                bundle.putString("email",me.getEmail());
+                bundle.putString("address",me.getAddress());
+                bundle.putString("hobbies",me.getHobby());
+                //bundle.putString("birth",me.getBornDate());
+                intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }
         });
     }
-
 }
