@@ -93,12 +93,15 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocus();
-                ShowInfoByToast("验证码已发送！");
-                if(judPhone())//去掉左右空格获取字符串
-                {
-                    SMSSDK.getVerificationCode("86",phone);
-                    ed_code.requestFocus();
+                if (CheckRegistrable()){
+                    ShowInfoByToast("验证码已发送！");
+                    if (judPhone())//去掉左右空格获取字符串
+                    {
+                        SMSSDK.getVerificationCode("86", phone);
+                        ed_code.requestFocus();
+                    }
                 }
+
             }
         });
 
@@ -106,19 +109,12 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocus();
-                //if(CheckRegistrable()){
-                ShowInfoByToast("注册成功！");
-                SignIn();
-                Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
-                //创建新Activity的同时清空站内所有Activities
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtras(CollectData());
-                startActivity(intent);
-                /*}
-                else{
+                if(CheckRegistrable()) {
+                    SignIn();
+                }
+                else {
                     ShowInfoByToast("注册失败");
                 }
-                 */
             }
         });
 
@@ -131,7 +127,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-       /* ed_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        ed_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
@@ -139,7 +135,7 @@ public class SignInActivity extends AppCompatActivity {
                     ChangeIcon(0, CheckPhone());
                 }
             }
-        });*/
+        });
         ed_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -156,7 +152,6 @@ public class SignInActivity extends AppCompatActivity {
                 if (!b) {
                     password = ed_password.getText().toString();
                     ChangeIcon(2, CheckPassword());
-                    CheckPassword();
                     if (iv_right[3].getVisibility() != iv_error[3].getVisibility())
                         ChangeIcon(3, CheckSecondPassword());
                 }
@@ -168,6 +163,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (!b) {
                     password2 = ed_password2.getText().toString();
                     ChangeIcon(3, CheckSecondPassword());
+                    ChangeIcon(2, CheckPassword());
                 }
             }
         });
@@ -187,7 +183,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     //检查是否可注册
-   /* private boolean CheckRegistrable() {
+    private boolean CheckRegistrable() {
         //有信息未完善
         for (int i = 0; i < 4; i++) {
             if (!correct[i]) {
@@ -205,9 +201,9 @@ public class SignInActivity extends AppCompatActivity {
         //   return false;
        // }
         return true;
-    }*/
+    }
 
-   /* private boolean CheckPhone() {
+    private boolean CheckPhone() {
         if (phone.length() != 11) {
             ShowInfoByToast("请输入正确的手机号");
             correct[0] = false;
@@ -215,7 +211,7 @@ public class SignInActivity extends AppCompatActivity {
             correct[0] = true;
         }
         return correct[0];
-    }*/
+    }
 
     private boolean CheckUserName() {
         if (username.length() > 20 || username.length() < 1) {
@@ -339,8 +335,12 @@ public class SignInActivity extends AppCompatActivity {
             {
 
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    Toast.makeText(getApplicationContext(), "验证码输入正确",
-                            Toast.LENGTH_LONG).show();
+                    ShowInfoByToast("注册成功！");
+                    Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
+                    //创建新Activity的同时清空站内所有Activities
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtras(CollectData());
+                    startActivity(intent);
                 }
             }
             else
