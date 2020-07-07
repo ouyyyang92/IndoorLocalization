@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.example.cilent.Client;
 import com.example.cilent.setloca;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.main.home.MyPageActivity;
 import com.example.suanfa.setloca2;
 
@@ -33,6 +34,7 @@ public class MapFragment extends Fragment {
     private int currentX = 0;
     private int currentY = 0;
     private int newX,newY;
+    private MainActivity parent;
 
     private setloca wifi;
     // TODO: Rename and change types of parameters
@@ -78,6 +80,7 @@ public class MapFragment extends Fragment {
 
     }
     public void InitLocation(){
+
         TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
                     translateAnimation.setDuration(100);
                     iv_location.setAnimation(translateAnimation);
@@ -85,29 +88,34 @@ public class MapFragment extends Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        iv_location= getActivity().findViewById(R.id.imageView_location);
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
+        parent= (MainActivity) getActivity();
+        newX=parent.px;
+        newY=parent.py;
+       iv_location= getActivity().findViewById(R.id.imageView_location);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 //                int num = 0;
-//                while(num < 10){
+                while(true){
 //                    num++;
 //                    newX = currentX + (100 - num) / 10;
 //                    newY = currentY - (100 - num) / 10;
-//                    TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
-//                    translateAnimation.setDuration(100);
-//                    iv_location.setAnimation(translateAnimation);
-//                    translateAnimation.start();
-//                    currentX = newX;
-//                    currentY = newY;
-//                    try {
-//                        Thread.sleep(100);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }).start();
+                    newX=parent.px;
+                    newY=parent.py;
+                    TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
+                    translateAnimation.setDuration(100);
+                    iv_location.setAnimation(translateAnimation);
+                    translateAnimation.start();
+                    currentX = newX;
+                    currentY = newY;
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
         new Thread(new Runnable() {
             @Override
