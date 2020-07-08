@@ -69,6 +69,7 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
                         bundle.getString("birth") +" "+ bundle.getString("address") + " " +bundle.getString("hobbies") ;
                 Client.send(str);
                 Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtras(bundle);
                 intent.setClass(HobbiesSelectionActivity.this, MainActivity.class);
                 startActivity(intent);

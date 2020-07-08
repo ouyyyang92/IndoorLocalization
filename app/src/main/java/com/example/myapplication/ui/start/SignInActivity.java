@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -177,6 +178,7 @@ public class SignInActivity extends AppCompatActivity {
             String string = "2 "+ phone + " " + password + " " + username;
             String string1 = Client.send(string);
             String[] strings = string1.split(",");
+            Log.d("错误信息",strings[0]);
             if (strings[0].equals("202") ){
                 flag2 = false;
             }
@@ -332,9 +334,13 @@ public class SignInActivity extends AppCompatActivity {
             super.handleMessage(msg);
             int event=msg.arg1;
             int result=msg.arg2;
+            String string = "ss";
+            if (result==SMSSDK.RESULT_COMPLETE){
+                string = "qqq";
+            }
+            Log.d("错误信息",string);
             if(result==SMSSDK.RESULT_COMPLETE)
             {
-
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (flag2){
                         ShowInfoByToast("注册成功！");

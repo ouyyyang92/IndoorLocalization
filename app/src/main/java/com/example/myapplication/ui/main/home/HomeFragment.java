@@ -14,6 +14,7 @@ import com.example.data.DateUtils;
 import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
+import com.example.myapplication.ui.start.LoginActivity;
 
 import java.util.Date;
 
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment {
     private Button btn_information;
     private MainActivity parent;
     private View view;
+    private Button btn_exit;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -113,7 +115,18 @@ public class HomeFragment extends Fragment {
 
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
+
+            }
+        });
+        btn_exit = parent.findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
+
 }

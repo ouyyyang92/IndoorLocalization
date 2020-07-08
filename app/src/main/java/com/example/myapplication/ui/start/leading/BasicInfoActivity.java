@@ -84,10 +84,10 @@ public class BasicInfoActivity extends AppCompatActivity {
                 RadioButton rb = findViewById(i);
                 switch (i % 3) {
                     case 0:
-                        gender = 1;
+                        gender = 0;
                         break;
                     case 1:
-                        gender = 0;
+                        gender = 1;
                         break;
                     case 2:
                         gender = 2;
@@ -139,12 +139,14 @@ public class BasicInfoActivity extends AppCompatActivity {
 
     private Bundle GetInformationBundle(){
         Bundle bundle = getIntent().getExtras();
+
         assert bundle != null;
         username = bundle.getString("username");
         bundle.putInt("icon", 0);
         bundle.putInt("gender", gender);
         bundle.putString("birth", Birth_toString());
         bundle.putString("address",location);
+        bundle.putString("email","11");
         return bundle;
     }
 
