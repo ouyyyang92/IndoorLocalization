@@ -54,6 +54,6 @@ public class MyPageActivity extends AppCompatActivity {
         tv_birth.setText(bundle.getString("birth"));
         tv_email.setText(bundle.getString("email"));
         tv_hobbies.setText(bundle.getString("hobbies"));
-        tv_location.setText(bundle.getString("location"));
+        tv_location.setText(bundle.getString("address"));
     }
 }

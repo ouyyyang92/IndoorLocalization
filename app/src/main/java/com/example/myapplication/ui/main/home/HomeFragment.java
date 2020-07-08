@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.data.DateUtils;
 import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
@@ -90,7 +91,7 @@ public class HomeFragment extends Fragment {
                 bundle.putString("email",me.getEmail());
                 bundle.putString("address",me.getAddress());
                 bundle.putString("hobbies",me.getHobby());
-                //bundle.putString("birth",me.getBornDate());
+                bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }

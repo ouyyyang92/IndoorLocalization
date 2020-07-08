@@ -35,6 +35,18 @@ public class Person {
 		this.creatDate = creatDate;
 	}
 
+	public Person(String phone, String name, String address, String email, int gender, Date bornDate, int age, String hobby, int headImg2) {
+		this.phone = phone;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.gender = gender;
+		this.bornDate = bornDate;
+		this.age = age;
+		this.hobby = hobby;
+		this.headImg2 = headImg2;
+	}
+
 	public Person(String phone, String password, String name, String address, String email, int gender, String headImg,
 				  Date creatDate, Date bornDate, int age, String hobby, String friends) {
 		super();

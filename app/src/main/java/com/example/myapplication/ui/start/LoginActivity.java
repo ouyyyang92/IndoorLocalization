@@ -123,8 +123,9 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putString("email", infos[3]);
         bundle.putInt("gender", Integer.parseInt(infos[4]));
         bundle.putString("birth", infos[5]);
-        bundle.putString("hobbies", infos[6]);
-        bundle.putString("icon", infos[7]);
+        bundle.putInt("age",Integer.parseInt(infos[6]));
+        bundle.putString("hobbies", infos[7]);
+        bundle.putInt("icon", Integer.parseInt(infos[8]));
 
         return bundle;
     }

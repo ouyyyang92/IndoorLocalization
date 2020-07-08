@@ -31,11 +31,11 @@ public class MapFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ImageView iv_location;
-    private int currentX = 0;
-    private int currentY = 0;
-    private int newX,newY;
+    private float currentX = 0;
+    private float currentY = 0;
+    private float newX,newY;
     private MainActivity parent;
-
+    private Button button_dingwei;
     private setloca wifi;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,6 +92,14 @@ public class MapFragment extends Fragment {
         newX=parent.px;
         newY=parent.py;
        iv_location= getActivity().findViewById(R.id.imageView_location);
+        button_dingwei = getActivity().findViewById(R.id.button);
+        button_dingwei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parent.Fresh();
+            }
+        });
+
         new Thread(new Runnable() {
             @Override
             public void run() {
