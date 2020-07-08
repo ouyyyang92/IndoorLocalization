@@ -81,16 +81,16 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
         cb_hobbies_swimming.setOnCheckedChangeListener(onCheckedChange);
     }
 
-    private  Bundle CompleteInformation() {
+    private Bundle CompleteInformation() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        Log.d("icon",bundle.getString("icon"));
-        Log.d("gender",bundle.getInt("gender")+"");
-        Log.d("birth",bundle.getString("birth"));
-        Log.d("location",bundle.getString("address"));
-        Log.d("hobbies",Hobbies_toString());
-        bundle.putString("hobbies",Hobbies_toString());
-        bundle.putInt("age",0);
+        Log.d("icon", bundle.getString("icon"));
+        Log.d("gender", bundle.getInt("gender") + "");
+        Log.d("birth", bundle.getString("birth"));
+        Log.d("location", bundle.getString("address"));
+        Log.d("hobbies", Hobbies_toString());
+        bundle.putString("hobbies", Hobbies_toString());
+        bundle.putInt("age", 0);
         return bundle;
     }
 
@@ -102,7 +102,7 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
             }
         }
         if (hobbies.length() != 0)
-            hobbies.deleteCharAt(hobbies.length()-1);//删除最后一个逗号
+            hobbies.deleteCharAt(hobbies.length() - 1);//删除最后一个逗号
         return hobbies.toString();
     }
 
