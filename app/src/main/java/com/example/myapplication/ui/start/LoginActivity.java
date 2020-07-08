@@ -85,19 +85,14 @@ public class LoginActivity extends AppCompatActivity {
             message = "登录成功";
             ShowInfoByToast(message);
             personinformation = strings[1];
-            System.out.println(personinformation);
-//            GetInformationBundle(personString);
             return true;
         } else if (strings[0].equals("101")) {
-            message = "用户名不存在";
+            message = "该手机号码未注册";
         } else if (strings[0].equals("102")) {
             message = "密码错误";
         }
         ShowInfoByToast(message);
         return false;
-//        if(client.send(str).equals("1"))
-//            return true;
-//        else return false;
     }
 
     private void ShowInfoByToast(String info) {
@@ -148,7 +143,6 @@ public class LoginActivity extends AppCompatActivity {
                             finish();   //结束掉该页面
                         } else {
                             ed_password.setText("");
-//                          Toast.makeText(LoginActivity.this, "手机号或密码错误", Toast.LENGTH_SHORT).show();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

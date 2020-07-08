@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.example.cilent.Client;
 import com.example.data.DateUtils;
 import com.example.data.Person;
 import com.example.myapplication.R;
@@ -62,9 +63,13 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CompleteInformation();
+                Bundle bundle = CompleteInformation();
+
+                String str = "4 "+ bundle.getString("username") +" "+ bundle.getInt("icon") +" " +bundle.getInt("gender") + " "+
+                        bundle.getString("birth") +" "+ bundle.getString("address") + " " +bundle.getString("hobbies") ;
+                Client.send(str);
                 Intent intent = new Intent();
-                intent.putExtras(CompleteInformation());
+                intent.putExtras(bundle);
                 intent.setClass(HobbiesSelectionActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -84,11 +89,7 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
     private Bundle CompleteInformation() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        Log.d("icon", bundle.getString("icon"));
-        Log.d("gender", bundle.getInt("gender") + "");
-        Log.d("birth", bundle.getString("birth"));
-        Log.d("location", bundle.getString("address"));
-        Log.d("hobbies", Hobbies_toString());
+
         bundle.putString("hobbies", Hobbies_toString());
         bundle.putInt("age", 0);
         return bundle;

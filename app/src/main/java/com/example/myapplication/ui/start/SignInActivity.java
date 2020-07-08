@@ -96,7 +96,6 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ClearFocus();
                 if (CheckRegistrable()){
-//                    ShowInfoByToast("验证码已发送！");
                     if (judPhone())//去掉左右空格获取字符串
                     {
                         SMSSDK.getVerificationCode("86", phone);
@@ -176,12 +175,9 @@ public class SignInActivity extends AppCompatActivity {
         if(judCord()){
             SMSSDK.submitVerificationCode("86",phone,code);
             String string = "2 "+ phone + " " + password + " " + username;
-            System.out.println(string);
             String string1 = Client.send(string);
-            System.out.println(string1);
             String[] strings = string1.split(",");
-            if (string1.equals("202") ){
-//                ShowInfoByToast("用户名已被注册");
+            if (strings[0].equals("202") ){
                 flag2 = false;
             }
         }
@@ -205,19 +201,6 @@ public class SignInActivity extends AppCompatActivity {
                 return false;
             }
         }
-
-//        Client.send(string);
-
-
-        //如果手机号已被注册，注册失败
-        //                ShowInfoByToast("手机号已被注册");
-
-        //验证码错误
-        //code = Integer.parseInt(ed_code.getText().toString());
-        //if (code != 123456) {
-        //   ShowInfoByToast("验证码错误");
-        //   return false;
-       // }
         return true;
     }
 

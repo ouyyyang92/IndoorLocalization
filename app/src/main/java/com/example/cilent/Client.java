@@ -20,10 +20,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
 public class Client {
-    public static void main(String[] args) {
-        /*System.out.println("服务器：" + send("1sadkjfa;owiejfa"));*/
-
-    }
 
     public static String send(String string){
         HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){

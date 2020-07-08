@@ -9,19 +9,19 @@ import java.util.Date;
  */
 public class Person {
 	private int id;
-	private String phone;//��
+	private String phone;//传
 	private String password;
-	private String name;//��
-	private String address;//��
-	private String email;//��
-	private int gender;//��
+	private String name;//传
+	private String address;//传
+	private String email;//传
+	private int gender;//传
 	private String headImg;
 	private Date creatDate;
-	private Date bornDate;//��
-	private int age;//��
-	private String hobby;//��
+	private Date bornDate;//传
+	private int age;//传
+	private String hobby;//传
 	private String friends;
-	private int headImg2;//��
+	private int headImg2;//传
 
 	public Person() {
 		super();

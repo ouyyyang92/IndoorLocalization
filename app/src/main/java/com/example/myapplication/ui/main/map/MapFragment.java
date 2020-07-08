@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.main.map;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,12 +11,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.cilent.Client;
-import com.example.cilent.setloca;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
-import com.example.myapplication.ui.main.home.MyPageActivity;
-import com.example.suanfa.setloca2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +31,6 @@ public class MapFragment extends Fragment {
     private float newX,newY;
     private MainActivity parent;
     private Button button_dingwei;
-    private setloca wifi;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
