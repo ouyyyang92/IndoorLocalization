@@ -15,6 +15,8 @@ import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
 
+import java.util.Date;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
@@ -88,10 +90,27 @@ public class HomeFragment extends Fragment {
                 Person me = parent.GetMe();
                 bundle.putString("username",me.getName());
                 bundle.putString("phone",me.getPhone());
-                bundle.putString("email",me.getEmail());
-                bundle.putString("address",me.getAddress());
-                bundle.putString("hobbies",me.getHobby());
-                bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
+                if (me.getEmail().equals("null")){
+                    bundle.putString("email","*****");
+                }
+                else bundle.putString("email",me.getEmail());
+
+                if (me.getAddress().equals("null")){
+                    bundle.putString("address","*****");
+                }
+                else bundle.putString("address",me.getAddress());
+
+                if (me.getHobby().equals("null")){
+                    bundle.putString("hobbies","*****");
+                }
+                else bundle.putString("hobbies",me.getHobby());
+
+                Date date = me.getBornDate();
+                if (date == null){
+                    bundle.putString("birth","*****");
+                }
+                else bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
+
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }
