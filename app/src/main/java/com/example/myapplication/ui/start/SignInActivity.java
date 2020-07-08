@@ -192,6 +192,7 @@ public class SignInActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("userId", 0);
         bundle.putString("username", username);
+        bundle.putString("phone",phone);
         return bundle;
     }
 

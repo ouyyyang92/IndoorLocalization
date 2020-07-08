@@ -28,9 +28,10 @@ public class BasicInfoActivity extends AppCompatActivity {
     private int birth_year;
     private int birth_month;
     private int birth_day;
-    private char gender;
+    private int gender;
     private String location = "还不知道怎么写";
     private String username;
+    private String phone;
     private int userId;
 
     @Override
@@ -40,7 +41,9 @@ public class BasicInfoActivity extends AppCompatActivity {
         birth_year = 2000;
         birth_month = 1;
         birth_day = 1;
-        GetDataFromParent();
+        Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
+        username = bundle.getString("username");
         FindView();
         SetListeners();
 
@@ -64,13 +67,7 @@ public class BasicInfoActivity extends AppCompatActivity {
                 ClearFocusOfEditText();
                 Intent intent = new Intent(BasicInfoActivity.this, HobbiesSelectionActivity.class);
                 //放置数据
-                Bundle bundle = new Bundle();
-                bundle.putInt("userId",userId);
-                bundle.putString("icon", "");
-                bundle.putChar("gender", gender);
-                bundle.putString("birth", Birth_toString());
-                bundle.putString("location",location);
-                intent.putExtras(bundle);
+                intent.putExtras(GetInformationBundle());
                 startActivity(intent);
             }
         });
@@ -87,13 +84,13 @@ public class BasicInfoActivity extends AppCompatActivity {
                 RadioButton rb = findViewById(i);
                 switch (i % 3) {
                     case 0:
-                        gender = 'f';
+                        gender = 1;
                         break;
                     case 1:
-                        gender = 'm';
+                        gender = 0;
                         break;
                     case 2:
-                        gender = 'o';
+                        gender = 2;
                         break;
                 }
             }
@@ -140,11 +137,15 @@ public class BasicInfoActivity extends AppCompatActivity {
 
     }
 
-    private void GetDataFromParent(){
+    private Bundle GetInformationBundle(){
         Bundle bundle = getIntent().getExtras();
-
+        assert bundle != null;
         username = bundle.getString("username");
-        userId = bundle.getInt("userId");
+        bundle.putInt("icon", 0);
+        bundle.putInt("gender", gender);
+        bundle.putString("birth", Birth_toString());
+        bundle.putString("address",location);
+        return bundle;
     }
 
     private void AdjustYear() {

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.example.data.DateUtils;
+import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
 
@@ -62,6 +64,7 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CompleteInformation();
                 Intent intent = new Intent();
+                intent.putExtras(CompleteInformation());
                 intent.setClass(HobbiesSelectionActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -81,21 +84,14 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
     private  Bundle CompleteInformation() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        Log.d("userId", bundle.getInt("userId") + "");
         Log.d("icon",bundle.getString("icon"));
-        Log.d("gender",bundle.getChar("gender")+"");
+        Log.d("gender",bundle.getInt("gender")+"");
         Log.d("birth",bundle.getString("birth"));
         Log.d("location",bundle.getString("address"));
         Log.d("hobbies",Hobbies_toString());
-        bundle.putString("phone", infos[0]);
-        bundle.putString("username", infos[1]);
-        bundle.putString("address", infos[2]);
-        bundle.putString("email", infos[3]);
-        bundle.putInt("gender", Integer.parseInt(infos[4]));
-        bundle.putString("birth", infos[5]);
-        bundle.putInt("age",Integer.parseInt(infos[6]));
-        bundle.putString("hobbies", infos[7]);
-        bundle.putInt("icon", Integer.parseInt(infos[8]));
+        bundle.putString("hobbies",Hobbies_toString());
+        bundle.putInt("age",0);
+        return bundle;
     }
 
     private String Hobbies_toString() {
