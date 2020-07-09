@@ -73,7 +73,7 @@ public class MyPageActivity extends AppCompatActivity {
         tv_location.setText(bundle.getString("address"));
         iv_icon.setImageDrawable(image[bundle.getInt("icon")]);
         if(bundle.getInt("gender") != 2 ){
-            iv_gender.setImageDrawable(genderImage[bundle.getInt("key")]);
+            iv_gender.setImageDrawable(genderImage[bundle.getInt("gender")]);
         }
     }
 

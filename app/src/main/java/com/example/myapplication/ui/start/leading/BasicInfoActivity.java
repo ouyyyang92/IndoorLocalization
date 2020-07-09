@@ -108,10 +108,10 @@ public class BasicInfoActivity extends AppCompatActivity {
                 RadioButton rb = findViewById(i);
                 switch (i % 3) {
                     case 0:
-                        gender = 0;
+                        gender = 1;
                         break;
                     case 1:
-                        gender = 1;
+                        gender = 0;
                         break;
                     case 2:
                         gender = 2;

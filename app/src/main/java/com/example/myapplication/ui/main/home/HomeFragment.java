@@ -109,6 +109,7 @@ public class HomeFragment extends Fragment {
                 bundle.putString("username",me.getName());
                 bundle.putString("phone",me.getPhone());
                 bundle.putInt("icon",me.getHeadImg2());
+                bundle.putInt("gender",me.getGender());
                 if (me.getEmail().equals("null")){
                     bundle.putString("email","*****");
                 }
@@ -139,6 +140,7 @@ public class HomeFragment extends Fragment {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

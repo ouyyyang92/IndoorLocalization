@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,14 +30,16 @@ import com.example.myapplication.ui.main.map.MapFragment;
 import java.util.Date;
 import java.util.List;
 
+
+
 public class MainActivity extends AppCompatActivity {
     private Button btn_map, btn_contacts, btn_home,button_dingwei;
     private MapFragment fra_map;
     private ContactsFragment fra_contacts;
     private HomeFragment fra_home;
     private Person me;
-    private int[] AP = new int[4];
-    public float px,py;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,45 +58,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         getSupportFragmentManager().beginTransaction().add(R.id.fl_main, fra_map).commitAllowingStateLoss();
-    }
-    public void init() {                 //数据初始化
-        for (int a = 0; a < 4; a++) {
-            AP[a] = -200;
-        }
-    }
-    public void Fresh() {
-        init();
-        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wm.startScan();                                  //开始扫描AP
-        int j =0;
-        List<ScanResult> results = wm.getScanResults();  //拿到扫描的结果
-        for (ScanResult result : results) {
-            if (result.SSID.equals("1604") && result.level > -100) {
-                AP[j] = result.level;
-                j++;
-            }
-            if (result.SSID.equals("TP-LINK_1704") && result.level > -100) {
-                AP[2] = result.level;
-            }
-            if (result.SSID.equals("1601T") && result.level > -100) {
-                AP[3] = result.level;
-            }
-        }
-        String str1 = "3";
-        for (int i = 0;i < 4;i++){
-            str1 = str1 + " " + AP[i] ;
-        }
-        String str2 = Client.send(str1);
-        String[] strings4 = str2.split("/");
-        String[] strings5 = strings4[1].split(" ");
-        Log.d("错误信息1",str2);
-        System.out.println(str2);
-        Log.d("错误信息2",strings5[1]);
-        px = (float)(Integer.parseInt(strings5[0])*410/12.0/6.8*16.5);
-        py = (float)((20-Integer.parseInt(strings5[1]))*410/12/6.8*16.5);
-//                System.out.println(str2);
 
     }
+
     private void FindView() {
         btn_map = findViewById(R.id.button_map);
         btn_contacts = findViewById(R.id.button_contacts);
@@ -141,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
     public Person GetMe(){
         return this.me;
     }
+
 }

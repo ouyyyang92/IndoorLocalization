@@ -64,9 +64,15 @@ public class HobbiesSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = CompleteInformation();
-
+//                int gender = bundle.getInt("gender");
+//                Log.d("错误信息",gender+"");
+//                String email = bundle.getString("email");
+//                if (email.equals(null)){
+//
+//                }
                 String str = "4 "+ bundle.getString("username") +" "+ bundle.getInt("icon") +" " +bundle.getInt("gender") + " "+
-                        bundle.getString("birth") +" "+ bundle.getString("address") + " " +bundle.getString("hobbies") ;
+                        bundle.getString("birth") +" "+ bundle.getString("address") + " " +bundle.getString("hobbies")
+                        + " " +bundle.getString("email");
                 Client.send(str);
                 Intent intent = new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

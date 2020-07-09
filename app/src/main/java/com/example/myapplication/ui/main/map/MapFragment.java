@@ -1,5 +1,8 @@
 package com.example.myapplication.ui.main.map;
 
+import android.content.Context;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +13,19 @@ import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.cilent.Client;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
+import com.example.step.OrientSensor;
+import com.example.step.StepSensorAcceleration;
+import com.example.step.StepSensorBase;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +47,10 @@ public class MapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int[] AP = new int[6];
+    public float px,py;
+    private Timer mTimer;   // 启动定时任务的对象
+    private final int SAMPLE_RATE = 2000; // 采样周期，以毫秒为单位，两秒一次
 
     public MapFragment() {
         // Required empty public constructor
@@ -80,17 +97,50 @@ public class MapFragment extends Fragment {
                     iv_location.setAnimation(translateAnimation);
                     translateAnimation.start();
     }
+    public void init() {                 //数据初始化
+        for (int a = 0; a < 6; a++) {
+            AP[a] = -100;
+        }
+    }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         parent= (MainActivity) getActivity();
-        newX=parent.px;
-        newY=parent.py;
+        newX=px;
+        newY=py;
        iv_location= getActivity().findViewById(R.id.imageView_location);
         button_dingwei = getActivity().findViewById(R.id.button);
         button_dingwei.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                parent.Fresh();
+                init();
+                WifiManager wm = (WifiManager) parent.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                wm.startScan();                                  //开始扫描AP
+                int j =0;
+                List<ScanResult> results = wm.getScanResults();  //拿到扫描的结果
+                for (ScanResult result : results) {
+                    if (result.SSID.equals("1604") && result.level > -100) {
+                        AP[j] = result.level;
+                        j++;
+                    }
+                    if (result.SSID.equals("TP-LINK_1704") && result.level > -100) {
+                        AP[2] = result.level;
+                    }
+                    if (result.SSID.equals("1601T") && result.level > -100) {
+                        AP[3] = result.level;
+                    }
+                }
+                String str1 = "11";
+                for (int i = 0;i < 6;i++){
+                    str1 = str1 + " " + AP[i] ;
+                }
+                Client.send(str1);
+
+//                String str2 = Client.send(str1);
+//                String[] strings4 = str2.split("/");
+//                String[] strings5 = strings4[1].split(" ");
+//                px = (float)(Integer.parseInt(strings5[0])*410/12.0/6.8*16.5);
+//                py = (float)((20-Integer.parseInt(strings5[1]))*410/12/6.8*16.5);
             }
         });
 
@@ -102,10 +152,10 @@ public class MapFragment extends Fragment {
 //                    num++;
 //                    newX = currentX + (100 - num) / 10;
 //                    newY = currentY - (100 - num) / 10;
-                    newX=parent.px;
-                    newY=parent.py;
+                    newX=px;
+                    newY=py;
                     TranslateAnimation translateAnimation = new TranslateAnimation(currentX,newX,currentY,newY);
-                    translateAnimation.setDuration(100);
+                    translateAnimation.setDuration(2000);
                     iv_location.setAnimation(translateAnimation);
                     translateAnimation.start();
                     currentX = newX;
