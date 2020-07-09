@@ -89,18 +89,16 @@
             <View
                 android:id="@+id/view"
                 android:layout_width="96dp"
-                android:layout_height="4dp"
-                android:background="#000"/>
+                android:layout_height="96dp"
+                android:background="@drawable/btn_frame"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/button_head_icon"
-                android:layout_below="@+id/view"
-                android:layout_width="96dp"
-                android:layout_height="92dp"
-                android:drawablePadding="4dp"
-                android:background="@drawable/btn_frame"
-                android:drawableTop="@drawable/ic_headimage_1"
-                android:textSize="30sp"/>
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"/>
+
 
             <RadioGroup
                 android:id="@+id/radioGroup_gender_select"

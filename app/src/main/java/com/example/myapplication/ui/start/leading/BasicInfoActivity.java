@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import com.example.myapplication.R;
 public class BasicInfoActivity extends AppCompatActivity {
     private static final String TAG = "LeadingActivity1";
     private Button btn_next;
-    private Button btn_icon;
+    private ImageView btn_icon;
     private RadioGroup rg_gender_selection;
     private EditText ed_birth_year;
     private EditText ed_birth_month;
@@ -71,13 +72,13 @@ public class BasicInfoActivity extends AppCompatActivity {
         ed_email = findViewById(R.id.editText_email);
         tv_welcome = findViewById(R.id.textView_welcome);
         tv_welcome.setText("欢迎 " + username + "!");
-
         image[0] = getDrawable(R.drawable.ic_headimage_1);
         image[1] = getDrawable(R.drawable.ic_headimage_2);
         image[2] = getDrawable(R.drawable.ic_headimage_3);
         image[3] = getDrawable(R.drawable.ic_headimage_4);
         image[4] = getDrawable(R.drawable.ic_headimage_5);
         image[5] = getDrawable(R.drawable.ic_headimage_6);
+        btn_icon.setImageDrawable(image[icon]);
     }
 
     private void SetListeners() {
@@ -96,7 +97,7 @@ public class BasicInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ClearFocusOfEditText();
                 icon = (icon + 1) % 6;
-                btn_icon.setCompoundDrawables(null,image[icon],null,null);
+                btn_icon.setImageDrawable(image[icon]);
                 btn_icon.bringToFront();
             }
         });
