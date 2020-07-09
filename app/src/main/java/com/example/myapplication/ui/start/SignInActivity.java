@@ -51,7 +51,6 @@ public class SignInActivity extends AppCompatActivity {
         FindView();
         SetListeners();
         for (int i = 0; i < 4; i++) correct[i] = false;
-
         eventHandler = new EventHandler(){
             public void afterEvent(int event,int result,Object data){
                 Message msg = new Message();
@@ -177,7 +176,7 @@ public class SignInActivity extends AppCompatActivity {
             SMSSDK.submitVerificationCode("86",phone,code);
             String string = "2 "+ phone + " " + password + " " + username;
             String string1 = Client.send(string);
-            String[] strings = string1.split(",");
+            String[] strings = string1.split("/");
             Log.d("错误信息",strings[0]);
             if (strings[0].equals("202") ){
                 flag2 = false;

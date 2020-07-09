@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,12 +80,13 @@ public class LoginActivity extends AppCompatActivity {
         Client client = new Client();
         String str = "1 " + phone + " " + password;
         String str1 = client.send(str);
-        String[] strings = str1.split(",");
+        String[] strings = str1.split("/");
         String message = "";
         if (strings[0].equals("100")) {
             message = "登录成功";
             ShowInfoByToast(message);
             personinformation = strings[1];
+            Log.d("错误信息",personinformation);
             return true;
         } else if (strings[0].equals("101")) {
             message = "该手机号码未注册";

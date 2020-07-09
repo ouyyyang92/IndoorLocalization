@@ -83,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
             str1 = str1 + " " + AP[i] ;
         }
         String str2 = Client.send(str1);
-        String[] strings4 = str2.split(",");
+        String[] strings4 = str2.split("/");
         String[] strings5 = strings4[1].split(" ");
+        Log.d("错误信息1",str2);
+        System.out.println(str2);
+        Log.d("错误信息2",strings5[1]);
         px = (float)(Integer.parseInt(strings5[0])*410/12.0/6.8*16.5);
         py = (float)((20-Integer.parseInt(strings5[1]))*410/12/6.8*16.5);
 //                System.out.println(str2);

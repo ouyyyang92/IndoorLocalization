@@ -30,9 +30,10 @@ public class MyPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
-        LoadImage();
+
         FindView();
         SetListeners();
+
         ChangeInfo();
     }
 
@@ -45,6 +46,7 @@ public class MyPageActivity extends AppCompatActivity {
         tv_hobbies = findViewById(R.id.tv_hobbies);
         tv_location = findViewById(R.id.tv_location);
         tv_username = findViewById(R.id.tv_username);
+        iv_icon = findViewById(R.id.head_image);
     }
 
     private void SetListeners() {
@@ -58,8 +60,10 @@ public class MyPageActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void ChangeInfo(){
         Bundle bundle = getIntent().getExtras();
+        LoadImage();
         tv_username.setText(bundle.getString("username"));
         tv_phone.setText(bundle.getString("phone"));
         tv_birth.setText(bundle.getString("birth"));
@@ -67,6 +71,7 @@ public class MyPageActivity extends AppCompatActivity {
         tv_hobbies.setText(bundle.getString("hobbies"));
         tv_location.setText(bundle.getString("address"));
         iv_icon.setImageDrawable(image[bundle.getInt("icon")]);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

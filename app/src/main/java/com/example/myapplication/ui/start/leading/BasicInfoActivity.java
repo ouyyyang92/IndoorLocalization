@@ -97,6 +97,7 @@ public class BasicInfoActivity extends AppCompatActivity {
                 ClearFocusOfEditText();
                 icon = (icon + 1) % 6;
                 btn_icon.setCompoundDrawables(null,image[icon],null,null);
+                btn_icon.bringToFront();
             }
         });
         rg_gender_selection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
