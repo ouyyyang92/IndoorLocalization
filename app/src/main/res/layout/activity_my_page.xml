@@ -77,7 +77,7 @@
 
             <TextView
                 android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:drawablePadding="30dp"
                 android:drawableLeft="@drawable/ic_phone"
@@ -86,7 +86,7 @@
 
             <TextView
                 android:id="@+id/tv_birth"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:drawablePadding="30dp"
                 android:drawableLeft="@drawable/ic_birth"
@@ -96,7 +96,7 @@
 
             <TextView
                 android:id="@+id/tv_hobbies"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:drawablePadding="30dp"
                 android:drawableLeft="@drawable/ic_hobby"
@@ -106,7 +106,7 @@
 
             <TextView
                 android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:drawablePadding="30dp"
                 android:drawableLeft="@drawable/ic_location"
@@ -116,7 +116,7 @@
 
             <TextView
                 android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:drawablePadding="30dp"
                 android:drawableLeft="@drawable/ic_email"
