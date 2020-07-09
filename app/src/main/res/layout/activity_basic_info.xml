@@ -86,21 +86,20 @@
             android:paddingLeft="28dp"
             android:paddingTop="23dp"
             android:orientation="vertical">
-
             <View
+                android:id="@+id/view"
                 android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:background="@drawable/btn_frame"
-                />
+                android:layout_height="4dp"
+                android:background="#000"/>
+
             <Button
                 android:id="@+id/button_head_icon"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/bg_btn_circle"
+                android:layout_below="@+id/view"
+                android:layout_width="96dp"
+                android:layout_height="92dp"
+                android:drawablePadding="4dp"
+                android:background="@drawable/btn_frame"
                 android:drawableTop="@drawable/ic_headimage_1"
-                android:text="+"
                 android:textSize="30sp"/>
 
             <RadioGroup
