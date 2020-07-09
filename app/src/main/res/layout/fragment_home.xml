@@ -28,26 +28,36 @@
         </LinearLayout>
 
         <!--账号-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
+            <View
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="#000000"
+                />
+
             <ImageView
-                android:id="@+id/head_image1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_reading" />
+                android:id="@+id/imageView_icon"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_headimage_1" />
 
             <TextView
-                android:id="@+id/tv1_name"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_icon"
+                android:layout_marginLeft="20dp"
                 android:text="aaaaaa"
                 android:textColor="#000000"
                 android:textSize="30sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

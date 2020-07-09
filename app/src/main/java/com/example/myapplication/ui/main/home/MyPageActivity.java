@@ -1,11 +1,15 @@
 package com.example.myapplication.ui.main.home;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -19,11 +23,14 @@ public class MyPageActivity extends AppCompatActivity {
     private TextView tv_email;
     private TextView tv_hobbies;
     private TextView tv_location;
-
+    private ImageView iv_icon;
+    private Drawable[] image = new Drawable[6];
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
+        LoadImage();
         FindView();
         SetListeners();
         ChangeInfo();
@@ -59,5 +66,16 @@ public class MyPageActivity extends AppCompatActivity {
         tv_email.setText(bundle.getString("email"));
         tv_hobbies.setText(bundle.getString("hobbies"));
         tv_location.setText(bundle.getString("address"));
+        iv_icon.setImageDrawable(image[bundle.getInt("icon")]);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void LoadImage(){
+        image[0] = getDrawable(R.drawable.ic_headimage_1);
+        image[1] = getDrawable(R.drawable.ic_headimage_2);
+        image[2] = getDrawable(R.drawable.ic_headimage_3);
+        image[3] = getDrawable(R.drawable.ic_headimage_4);
+        image[4] = getDrawable(R.drawable.ic_headimage_5);
+        image[5] = getDrawable(R.drawable.ic_headimage_6);
     }
 }

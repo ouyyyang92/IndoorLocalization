@@ -29,7 +29,7 @@
             android:layout_marginTop="80dp">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
@@ -67,21 +67,39 @@
                 android:textAlignment="textEnd"
                 android:gravity="end"
                 android:text="地区" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:textAlignment="textEnd"
+                android:gravity="end"
+                android:text="邮箱" />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:paddingLeft="30dp"
-            android:paddingTop="25dp"
+            android:paddingLeft="28dp"
+            android:paddingTop="23dp"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="#000000"
+                />
             <Button
                 android:id="@+id/button_head_icon"
-                android:layout_width="wrap_content"
+                android:layout_width="88dp"
                 android:layout_height="88dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/bg_btn_circle"
+                android:drawableTop="@drawable/ic_headimage_1"
                 android:text="+"
                 android:textSize="30sp"/>
 
@@ -155,6 +173,35 @@
                 android:text="01"
                 android:maxLength="2"
                 android:gravity="center_horizontal" />
+
+            <EditText
+                android:id="@+id/editText_locatin"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_below="@id/editText_year"
+                android:layout_marginTop="20dp"
+                android:hint="中国-北京-海淀"/>
+
+            <EditText
+                android:id="@+id/editText_email"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_below="@id/editText_locatin"
+                android:layout_marginTop="20dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/button_head_icon"
+                android:layout_marginTop="75dp"
+                android:text="（点击切换图片）" />
+
 
         </RelativeLayout>
     </LinearLayout>

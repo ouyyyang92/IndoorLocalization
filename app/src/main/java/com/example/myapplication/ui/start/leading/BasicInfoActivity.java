@@ -1,8 +1,11 @@
 package com.example.myapplication.ui.start.leading;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.transcode.DrawableBytesTranscoder;
 import com.example.myapplication.R;
 
 public class BasicInfoActivity extends AppCompatActivity {
@@ -22,18 +26,24 @@ public class BasicInfoActivity extends AppCompatActivity {
     private EditText ed_birth_year;
     private EditText ed_birth_month;
     private EditText ed_birth_day;
+    private EditText ed_location;
+    private EditText ed_email;
     private TextView tv_welcome;
     private View lose_focus;
+    private Drawable[] image = new Drawable[6];
 
     private int birth_year;
     private int birth_month;
     private int birth_day;
     private int gender;
+    private int icon = 0;
     private String location = "还不知道怎么写";
+    private String email;
     private String username;
     private String phone;
     private int userId;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,7 @@ public class BasicInfoActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void FindView() {
         btn_next = findViewById(R.id.button_next);
         btn_icon = findViewById(R.id.button_head_icon);
@@ -56,8 +67,17 @@ public class BasicInfoActivity extends AppCompatActivity {
         ed_birth_year = findViewById(R.id.editText_year);
         ed_birth_month = findViewById(R.id.editText_month);
         ed_birth_day = findViewById(R.id.editText_day);
+        ed_location = findViewById(R.id.editText_locatin);
+        ed_email = findViewById(R.id.editText_email);
         tv_welcome = findViewById(R.id.textView_welcome);
         tv_welcome.setText("欢迎 " + username + "!");
+
+        image[0] = getDrawable(R.drawable.ic_headimage_1);
+        image[1] = getDrawable(R.drawable.ic_headimage_2);
+        image[2] = getDrawable(R.drawable.ic_headimage_3);
+        image[3] = getDrawable(R.drawable.ic_headimage_4);
+        image[4] = getDrawable(R.drawable.ic_headimage_5);
+        image[5] = getDrawable(R.drawable.ic_headimage_6);
     }
 
     private void SetListeners() {
@@ -75,6 +95,8 @@ public class BasicInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocusOfEditText();
+                icon = (icon + 1) % 6;
+                btn_icon.setCompoundDrawables(null,image[icon],null,null);
             }
         });
         rg_gender_selection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -142,11 +164,11 @@ public class BasicInfoActivity extends AppCompatActivity {
 
         assert bundle != null;
         username = bundle.getString("username");
-        bundle.putInt("icon", 0);
+        bundle.putInt("icon", icon);
         bundle.putInt("gender", gender);
         bundle.putString("birth", Birth_toString());
-        bundle.putString("address",location);
-        bundle.putString("email","11");
+        bundle.putString("address",ed_location.getText().toString());
+        bundle.putString("email",ed_email.getText().toString());
         return bundle;
     }
 
@@ -221,5 +243,7 @@ public class BasicInfoActivity extends AppCompatActivity {
         ed_birth_day.clearFocus();
         ed_birth_month.clearFocus();
         ed_birth_year.clearFocus();
+        ed_email.clearFocus();
+        ed_location.clearFocus();
     }
 }

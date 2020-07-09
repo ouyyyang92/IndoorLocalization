@@ -1,14 +1,20 @@
 package com.example.myapplication.ui.main.home;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.data.DateUtils;
 import com.example.data.Person;
@@ -39,6 +45,10 @@ public class HomeFragment extends Fragment {
     private MainActivity parent;
     private View view;
     private Button btn_exit;
+    private ImageView iv_icon;
+    private TextView tv_name;
+    private Drawable[] image = new Drawable[6];
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -78,10 +88,16 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         parent = (MainActivity) getActivity();
         assert parent != null;
+        LoadImage();
+        iv_icon = parent.findViewById(R.id.imageView_icon);
+        iv_icon.setImageDrawable(image[parent.GetMe().getHeadImg2()]);
+        tv_name = parent.findViewById(R.id.tv_name);
+        tv_name.setText(parent.GetMe().getName());
         btn_information= parent.findViewById(R.id.btn_information);
         btn_information.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +108,7 @@ public class HomeFragment extends Fragment {
                 Person me = parent.GetMe();
                 bundle.putString("username",me.getName());
                 bundle.putString("phone",me.getPhone());
+                bundle.putInt("icon",me.getHeadImg2());
                 if (me.getEmail().equals("null")){
                     bundle.putString("email","*****");
                 }
@@ -127,6 +144,16 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void LoadImage(){
+        image[0] = parent.getDrawable(R.drawable.ic_headimage_1);
+        image[1] = parent.getDrawable(R.drawable.ic_headimage_2);
+        image[2] = parent.getDrawable(R.drawable.ic_headimage_3);
+        image[3] = parent.getDrawable(R.drawable.ic_headimage_4);
+        image[4] = parent.getDrawable(R.drawable.ic_headimage_5);
+        image[5] = parent.getDrawable(R.drawable.ic_headimage_6);
     }
 
 }
