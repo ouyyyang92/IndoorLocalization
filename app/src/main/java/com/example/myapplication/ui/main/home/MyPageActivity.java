@@ -24,7 +24,9 @@ public class MyPageActivity extends AppCompatActivity {
     private TextView tv_hobbies;
     private TextView tv_location;
     private ImageView iv_icon;
+    private ImageView iv_gender;
     private Drawable[] image = new Drawable[6];
+    private Drawable[] genderImage = new Drawable[2];
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +49,14 @@ public class MyPageActivity extends AppCompatActivity {
         tv_location = findViewById(R.id.tv_location);
         tv_username = findViewById(R.id.tv_username);
         iv_icon = findViewById(R.id.head_image);
+        iv_gender = findViewById(R.id.imageView_gender);
     }
 
     private void SetListeners() {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 finish();
-
             }
         });
     }
@@ -71,7 +72,9 @@ public class MyPageActivity extends AppCompatActivity {
         tv_hobbies.setText(bundle.getString("hobbies"));
         tv_location.setText(bundle.getString("address"));
         iv_icon.setImageDrawable(image[bundle.getInt("icon")]);
-
+        if(bundle.getInt("gender") != 2 ){
+            iv_gender.setImageDrawable(genderImage[bundle.getInt("key")]);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -82,5 +85,7 @@ public class MyPageActivity extends AppCompatActivity {
         image[3] = getDrawable(R.drawable.ic_headimage_4);
         image[4] = getDrawable(R.drawable.ic_headimage_5);
         image[5] = getDrawable(R.drawable.ic_headimage_6);
+        genderImage[0] = getDrawable(R.drawable.ic_male_show);
+        genderImage[1] = getDrawable(R.drawable.ic_female_show);
     }
 }
