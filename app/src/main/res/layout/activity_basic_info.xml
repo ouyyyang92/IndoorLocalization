@@ -90,7 +90,7 @@
             <View
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:background="#000000"
+                android:background="@drawable/btn_frame"
                 />
             <Button
                 android:id="@+id/button_head_icon"
