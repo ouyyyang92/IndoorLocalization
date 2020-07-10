@@ -28,7 +28,7 @@ public class Client {
             }
         });
         try {
-            Socket s = new Socket("192.168.0.106",8887);
+            Socket s = new Socket("192.168.0.106",8888);
 
             //构建IO
             InputStream is = s.getInputStream();
