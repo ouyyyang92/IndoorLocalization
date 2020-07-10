@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.contacts;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.main.home.MyPageActivity;
 
 /**
@@ -29,6 +32,9 @@ public class ContactsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ListView lv_contacts;
+    private Button btn_add;
+    private Activity parent;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -65,9 +71,16 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_contacts, container, false);
+        View contentView = inflater.inflate(R.layout.fragment_contacts, container, false);
+        parent = (MainActivity)getActivity();
+        FindView();
+        lv_contacts.setAdapter(new ContactsAdapter(inflater));
+        return contentView;
     }
 
+    private void FindView(){
+        lv_contacts = parent.findViewById(R.id.listView_contacts);
+        btn_add = parent.findViewById(R.id.button_add);
+    }
 
 }

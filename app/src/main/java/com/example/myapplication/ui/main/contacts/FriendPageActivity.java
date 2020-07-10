@@ -1,9 +1,8 @@
-package com.example.myapplication.ui.main.home;
+package com.example.myapplication.ui.main.contacts;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.start.LoginActivity;
 
-public class MyPageActivity extends AppCompatActivity {
+public class FriendPageActivity extends AppCompatActivity {
     private Button btn_back;
+    private Button btn_add_friends;
+    private Button btn_chat;
     private TextView tv_username;
     private TextView tv_phone;
     private TextView tv_birth;
@@ -27,18 +28,22 @@ public class MyPageActivity extends AppCompatActivity {
     private ImageView iv_gender;
     private Drawable[] image = new Drawable[6];
     private Drawable[] genderImage = new Drawable[2];
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_page);
+        setContentView(R.layout.activity_friend_page);
+        LoadInfo();
         FindView();
         SetListeners();
-        LoadInfo();
+        SwitchMode();
     }
 
     private void FindView() {
         btn_back = findViewById(R.id.button_back);
+        btn_add_friends = findViewById(R.id.button_add_friend);
+        btn_chat = findViewById(R.id.button_chat);
         tv_username = findViewById(R.id.tv_username);
         tv_phone = findViewById(R.id.tv_phone);
         tv_birth = findViewById(R.id.tv_birth);
@@ -55,6 +60,20 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        btn_add_friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(FriendPageActivity.this,"已发送请求",Toast.LENGTH_SHORT).show();
+                //
+
+            }
+        });
+        btn_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(FriendPageActivity.this,"敬请期待",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -85,5 +104,22 @@ public class MyPageActivity extends AppCompatActivity {
         image[5] = getDrawable(R.drawable.ic_headimage_6);
         genderImage[0] = getDrawable(R.drawable.ic_male_show);
         genderImage[1] = getDrawable(R.drawable.ic_female_show);
+    }
+
+    private void SwitchMode(){
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            switch (bundle.getString("state")){
+                case "add a friend":
+                    btn_chat.setVisibility(View.INVISIBLE);
+                    break;
+                case "my friend page":
+                    btn_add_friends.setVisibility(View.INVISIBLE);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + bundle.getString("state"));
+            }
+        }
+
     }
 }
