@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cilent.Client;
 import com.example.myapplication.R;
@@ -83,7 +84,11 @@ public class ModifyActivity extends AppCompatActivity {
                 Intent intent = new Intent(ModifyActivity.this, MyPageActivity.class);
                 String str1 = "12 "+ beforeName+" " +et_name.getText().toString() + " " +icon +" " + gender +" " +
                         Birth_toString() + " " + et_location.getText().toString() + " " +et_email.getText().toString();
-                Client.send(str1);
+                String str2 = Client.send(str1);
+                String[] str3 = str2.split("/");
+                if (str3[0].equals("202")){
+                    Toast.makeText(ModifyActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                }
                 intent.putExtras(GetInformationBundle());
                 startActivity(intent);
             }

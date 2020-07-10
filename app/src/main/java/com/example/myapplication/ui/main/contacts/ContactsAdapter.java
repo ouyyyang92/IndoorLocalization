@@ -72,7 +72,7 @@ public class ContactsAdapter extends BaseAdapter {
         //显示状态
         String state = "在线";
         holder.textView_state.setText("["+"state"+"]");
-        return null;
+        return view;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

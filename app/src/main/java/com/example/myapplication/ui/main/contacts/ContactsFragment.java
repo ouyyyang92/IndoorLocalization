@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.print.PrinterId;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,16 +86,17 @@ public class ContactsFragment extends Fragment {
         // Inflate the layout for this fragment
         View contentView = inflater.inflate(R.layout.fragment_contacts, container, false);
         parent = (MainActivity)getActivity();
-        FindView();
+        btn_search = contentView.findViewById(R.id.button_search);
+        ed_search = contentView.findViewById(R.id.editText_search);
+        lv_contacts = contentView.findViewById(R.id.listView_contacts);
+        List<Person> friends = parent.GetFriend();
+        lv_contacts.setAdapter(new ContactsAdapter(parent,friends));
         SetListeners();
         return contentView;
     }
 
     private void FindView(){
-        lv_contacts = parent.findViewById(R.id.listView_contacts);
-        btn_search = parent.findViewById(R.id.button_search);
-        ed_search = parent.findViewById(R.id.editText_search);
-        lv_contacts.setAdapter(new ContactsAdapter(parent,parent.GetFriend()));
+
     }
 
     private void SetListeners(){
@@ -103,7 +105,7 @@ public class ContactsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //获取用户名
                 Intent intent = new Intent(parent,FriendPageActivity.class);
-                friend = (Person) lv_contacts.getAdapter().getItem(i);
+                friend = parent.GetFriend().get(i);
                 intent.putExtras(GetFriendBundle(true));
                 startActivity(intent);
             }
@@ -135,36 +137,37 @@ public class ContactsFragment extends Fragment {
     private Bundle GetFriendBundle(boolean isFriend){
         Bundle bundle = new Bundle();
 
-        if( isFriend ){ //不是好友
+        if( !isFriend ){ //不是好友
             bundle.putString("state","add a friend");
         }else {
             bundle.putString("state","my friend's page");
         }
 
-//                bundle.putString("username",friend.getName());
-//                bundle.putString("phone",friend.getPhone());
-//                bundle.putInt("icon",friend.getHeadImg2());
-//                bundle.putInt("gender",friend.getGender());
-//                if (friend.getEmail().equals("null")){
-//                    bundle.putString("email","*****");
-//                }
-//                else bundle.putString("email",friend.getEmail());
-//
-//                if (friend.getAddress().equals("null")){
-//                    bundle.putString("address","*****");
-//                }
-//                else bundle.putString("address",friend.getAddress());
-//
-//                if (friend.getHobby().equals("null")){
-//                    bundle.putString("hobbies","*****");
-//                }
-//                else bundle.putString("hobbies",friend.getHobby());
-//
-//                Date date = friend.getBornDate();
-//                if (date == null){
-//                    bundle.putString("birth","*****");
-//                }
-//                else bundle.putString("birth", DateUtils.udateToString(friend.getBornDate()));
+                bundle.putString("username",friend.getName());
+                bundle.putString("phone",friend.getPhone());
+                bundle.putInt("icon",friend.getHeadImg2());
+                bundle.putInt("gender",friend.getGender());
+                if (friend.getEmail().equals("null")){
+                    bundle.putString("email","*****");
+                }
+                else bundle.putString("email",friend.getEmail());
+
+                if (friend.getAddress().equals("null")){
+                    bundle.putString("address","*****");
+                }
+                else bundle.putString("address",friend.getAddress());
+
+                if (friend.getHobby().equals("null")){
+                    bundle.putString("hobbies","*****");
+                }
+                else bundle.putString("hobbies",friend.getHobby());
+
+                Date date = friend.getBornDate();
+                if (date == null){
+                    bundle.putString("birth","*****");
+                }
+                else bundle.putString("birth", DateUtils.udateToString(friend.getBornDate()));
+                Log.d("错误信息333",friend.getName());
         return bundle;
     }
 }

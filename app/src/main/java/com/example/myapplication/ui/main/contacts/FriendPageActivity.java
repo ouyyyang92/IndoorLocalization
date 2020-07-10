@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,8 +35,8 @@ public class FriendPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_page);
-        LoadInfo();
         FindView();
+        LoadInfo();
         SetListeners();
         SwitchMode();
     }
@@ -83,6 +84,7 @@ public class FriendPageActivity extends AppCompatActivity {
     private void LoadInfo(){
         Bundle bundle = getIntent().getExtras();
         LoadImage();
+        Log.d("错误信息333",bundle.getString("username"));
         tv_username.setText(bundle.getString("username"));
         tv_phone.setText(bundle.getString("phone"));
         tv_birth.setText(bundle.getString("birth"));

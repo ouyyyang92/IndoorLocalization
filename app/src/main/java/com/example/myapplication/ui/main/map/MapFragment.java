@@ -134,13 +134,13 @@ public class MapFragment extends Fragment {
                         AP[5] = result.level;
                     }
                 }
-                str1 = "3 " + AP[0] + " " + AP[1] + " " + AP[2] + " " + AP[3] + " " + AP[4] + " " + AP[5];
+                String name = parent.GetMe().getName();
+                str1 = "3 " + name +" "+ AP[0] + " " + AP[1] + " " + AP[2] + " " + AP[3] + " " + AP[4] + " " + AP[5];
                 String str2 = Client.send(str1);
                 String[] strings4 = str2.split("/");
                 String[] strings5 = strings4[1].split(" ");
-                px = (float) (Integer.parseInt(strings5[0]) * 410 / 12.0 / 6.8 * 16.5);
-                py = (float) ((20 - Integer.parseInt(strings5[1])) * 410 / 12 / 6.8 * 16.5);
-
+                px = (float) (Integer.parseInt(strings5[0]) * 1000 / 12.0 );
+                py = (float) ((20 - Integer.parseInt(strings5[1])) * 1000 / 12.0 );
             }
             super.handleMessage(msg);
         }
@@ -167,7 +167,7 @@ public class MapFragment extends Fragment {
                         handler.sendMessage(message);
 
                     }
-                }, 0, 10000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
+                }, 0, 5000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
             }
 
 
@@ -184,6 +184,7 @@ public class MapFragment extends Fragment {
                     newX = px;
                     newY = py;
                     TranslateAnimation translateAnimation = new TranslateAnimation(currentX, newX, currentY, newY);
+//                    TranslateAnimation translateAnimation = new TranslateAnimation(0, 1000, 0, 0);
                     translateAnimation.setDuration(100);//动画持续时间
                     iv_location.setAnimation(translateAnimation);
                     translateAnimation.start();
