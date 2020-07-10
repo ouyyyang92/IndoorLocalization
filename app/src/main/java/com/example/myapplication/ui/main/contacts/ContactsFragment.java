@@ -87,7 +87,6 @@ public class ContactsFragment extends Fragment {
         parent = (MainActivity)getActivity();
         FindView();
         SetListeners();
-//        lv_contacts.setAdapter(new ContactsAdapter(parent,));
         return contentView;
     }
 
@@ -95,6 +94,7 @@ public class ContactsFragment extends Fragment {
         lv_contacts = parent.findViewById(R.id.listView_contacts);
         btn_search = parent.findViewById(R.id.button_search);
         ed_search = parent.findViewById(R.id.editText_search);
+        lv_contacts.setAdapter(new ContactsAdapter(parent,parent.GetFriend()));
     }
 
     private void SetListeners(){
