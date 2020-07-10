@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button btn_my_page;
+    private Button btn_friends_request;
     private RelativeLayout rl_information;
     private Button btn_information;
     private MainActivity parent;
@@ -129,14 +130,22 @@ public class HomeFragment extends Fragment {
                 else bundle.putString("hobbies",me.getHobby());
 
                 Date date = me.getBornDate();
-                if (date == null){
-                    bundle.putString("birth","*****");
-                }
-                else bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
+                if (date == null) {
+                    bundle.putString("birth", "*****");
+                } else bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
 
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
 
+            }
+        });
+        btn_friends_request = parent.findViewById(R.id.btn_friends_request);
+        btn_friends_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(parent, RequestActivity.class);
+                intent.putExtra("username", parent.GetMe().getName());
+                startActivity(intent);
             }
         });
         btn_exit = parent.findViewById(R.id.btn_exit);
@@ -144,7 +153,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String name = parent.GetMe().getName();
-                String string = "13 "+ name;
+                String string = "13 " + name;
                 Client.send(string);
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

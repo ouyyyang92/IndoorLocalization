@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageView_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:padding="3dp"
+        android:background="@drawable/btn_frame"
+        android:src="@drawable/ic_headimage_1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_username"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:text="ouyyyang"
+            android:singleLine="true"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/button_accept"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/button_reject"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/ic_right" />
+
+        <Button
+            android:id="@+id/button_reject"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_reject" />
+
+        <TextView
+            android:id="@+id/textView_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已处理！"
+            android:layout_toRightOf="@id/textView_username"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp" />
+    </RelativeLayout>
+</LinearLayout>
