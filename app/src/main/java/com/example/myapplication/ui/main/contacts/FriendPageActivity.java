@@ -65,6 +65,7 @@ public class FriendPageActivity extends AppCompatActivity {
         btn_add_friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddAsFriend();
                 Toast.makeText(FriendPageActivity.this,"已发送请求",Toast.LENGTH_SHORT).show();
                 //
 
@@ -113,7 +114,7 @@ public class FriendPageActivity extends AppCompatActivity {
                 case "add a friend":
                     btn_chat.setVisibility(View.INVISIBLE);
                     break;
-                case "my friend page":
+                case "my friend's page":
                     btn_add_friends.setVisibility(View.INVISIBLE);
                     break;
                 default:
@@ -121,5 +122,9 @@ public class FriendPageActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void AddAsFriend(){
+        String username = tv_username.getText().toString();
     }
 }

@@ -6,15 +6,22 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.print.PrinterId;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.data.DateUtils;
+import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.main.home.MyPageActivity;
+
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,8 +40,10 @@ public class ContactsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ListView lv_contacts;
-    private Button btn_add;
+    private Button btn_search;
+    private EditText ed_search;
     private Activity parent;
+    private String searchKey;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -80,7 +89,70 @@ public class ContactsFragment extends Fragment {
 
     private void FindView(){
         lv_contacts = parent.findViewById(R.id.listView_contacts);
-        btn_add = parent.findViewById(R.id.button_add);
+        btn_search = parent.findViewById(R.id.button_search);
+        ed_search = parent.findViewById(R.id.editText_search);
     }
 
+    private void SetListeners(){
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(UserExist()){
+                    Intent intent = new Intent(parent,FriendPageActivity.class);
+                    intent.putExtras(GetFriendBundle());
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(parent,"用户不存在",Toast.LENGTH_SHORT);
+                }
+
+            }
+        });
+    }
+
+    private boolean UserExist(){
+        searchKey = ed_search.getText().toString();
+        return true;
+    }
+
+    private boolean IsMyFriend(){
+
+        return true;
+    }
+
+    private Bundle GetFriendBundle(){
+        Bundle bundle = new Bundle();
+
+        if( !IsMyFriend() ){ //不是好友
+            bundle.putString("state","add a friend");
+        }else {
+            bundle.putString("state","my friend's page");
+        }
+
+        //                Person friend;
+//                bundle.putString("username",friend.getName());
+//                bundle.putString("phone",friend.getPhone());
+//                bundle.putInt("icon",friend.getHeadImg2());
+//                bundle.putInt("gender",friend.getGender());
+//                if (friend.getEmail().equals("null")){
+//                    bundle.putString("email","*****");
+//                }
+//                else bundle.putString("email",friend.getEmail());
+//
+//                if (friend.getAddress().equals("null")){
+//                    bundle.putString("address","*****");
+//                }
+//                else bundle.putString("address",friend.getAddress());
+//
+//                if (friend.getHobby().equals("null")){
+//                    bundle.putString("hobbies","*****");
+//                }
+//                else bundle.putString("hobbies",friend.getHobby());
+//
+//                Date date = friend.getBornDate();
+//                if (date == null){
+//                    bundle.putString("birth","*****");
+//                }
+//                else bundle.putString("birth", DateUtils.udateToString(friend.getBornDate()));
+        return bundle;
+    }
 }

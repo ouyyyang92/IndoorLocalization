@@ -19,26 +19,35 @@
             android:textSize="35dp"
             android:text="联系人" />
 
-        <SearchView
-            android:id="@+id/searchView"
+        <EditText
+            android:id="@+id/editText_search"
             android:layout_below="@id/textView10"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_search"
+            android:paddingLeft="20dp"
+            android:drawablePadding="20dp"
+            android:hint="输入用户名搜索"
             android:layout_height="50dp" />
 
         <Button
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:id="@+id/button_search"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/bg_btn_apparent"
-            android:drawableTop="@drawable/ic_add"/>
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="搜索"
+            android:background="@drawable/bg_btn_normal"
+            android:layout_below="@+id/textView10"/>
 
         <ListView
             android:id="@+id/listView_contacts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/textView10"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="70dp">
 
         </ListView>
     </RelativeLayout>
