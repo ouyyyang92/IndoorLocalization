@@ -27,6 +27,7 @@
         <activity android:name=".ui.start.leading.HobbiesSelectionActivity" />
         <activity android:name=".ui.start.LoginActivity" />
         <activity android:name=".ui.start.SignInActivity" />
+        <activity android:name=".ui.main.home.ModifyActivity" />
         <activity android:name=".ui.start.leading.BasicInfoActivity" />
         <activity android:name=".ui.start.StartActivity">
             <intent-filter>

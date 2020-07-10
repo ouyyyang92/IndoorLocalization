@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/colorBackground"
+tools:context=".ui.main.home.ModifyActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/button_back1"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_previous" />
+</LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp">
+
+        <TextView
+            android:id="@+id/textView_headimage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="头像"
+            />
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="用户名" />
+
+        <TextView
+            android:id="@+id/textView_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="性别" />
+
+        <TextView
+            android:id="@+id/textView_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="生日" />
+
+        <TextView
+            android:id="@+id/textView_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="地区" />
+
+        <TextView
+            android:id="@+id/eT_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="25sp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:text="邮箱" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:paddingLeft="28dp"
+        android:paddingTop="23dp"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/view"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/btn_frame"/>
+
+        <ImageView
+            android:id="@+id/iv_head_icon"
+            android:layout_width="95dp"
+            android:layout_height="82dp"
+            android:layout_marginLeft="4dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <EditText
+            android:id="@+id/eT_name"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_head_icon"
+            android:ems="10"
+            android:hint="aaaaa"
+            android:layout_marginTop="30dp"
+            android:inputType="textPersonName" />
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup_gender_select1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eT_name"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+
+            <RadioButton
+                android:id="@+id/radio_male"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/selector_male"
+                android:button="@drawable/ic_male" />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:button="@drawable/ic_female"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/selector_female"/>
+
+            <RadioButton
+                android:id="@+id/radio_other"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:button="@drawable/ic_unknown"
+                android:background="@drawable/selector_unknown"/>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/eT_year"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_below="@id/radioGroup_gender_select1"
+            android:layout_marginTop="25dp"
+            android:maxLength="4"
+            android:text="2000" />
+
+        <EditText
+            android:id="@+id/eT_month"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_below="@id/radioGroup_gender_select1"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="60dp"
+            android:textAlignment="center"
+            android:text="01"
+            android:maxLength="2"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/eT_day"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_below="@id/radioGroup_gender_select1"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="100dp"
+            android:textAlignment="center"
+            android:text="01"
+            android:maxLength="2"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/eT_location"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eT_year"
+            android:ems="10"
+            android:hint="中国-北京-海淀"
+            android:layout_marginTop="20dp"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_below="@id/eT_location"
+            android:layout_marginTop="20dp"
+            android:hint="1234567890@qq.com" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_head_icon"
+            android:layout_marginTop="75dp"
+            android:text="（点击切换图片）" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
+    <Button
+        android:id="@+id/btn_define"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="确定修改"
+        android:textSize="20sp" />
+</LinearLayout>

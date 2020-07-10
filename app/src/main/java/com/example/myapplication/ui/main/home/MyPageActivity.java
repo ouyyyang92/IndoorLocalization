@@ -27,14 +27,19 @@ public class MyPageActivity extends AppCompatActivity {
     private ImageView iv_gender;
     private Drawable[] image = new Drawable[6];
     private Drawable[] genderImage = new Drawable[2];
+    private Button button_edit;
+    Bundle bundle;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
+        bundle = getIntent().getExtras();
         FindView();
         SetListeners();
-        LoadInfo();
+
+        ChangeInfo();
+
     }
 
     private void FindView() {
@@ -48,6 +53,7 @@ public class MyPageActivity extends AppCompatActivity {
         tv_username = findViewById(R.id.tv_username);
         iv_icon = findViewById(R.id.head_image);
         iv_gender = findViewById(R.id.imageView_gender);
+        button_edit = findViewById(R.id.button_edit);
     }
 
     private void SetListeners() {
@@ -57,10 +63,19 @@ public class MyPageActivity extends AppCompatActivity {
                 finish();
             }
         });
+        button_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setClass(MyPageActivity.this,ModifyActivity.class);
+                intent.putExtra("username",tv_username.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void LoadInfo(){
+    private void ChangeInfo(){
         Bundle bundle = getIntent().getExtras();
         LoadImage();
         tv_username.setText(bundle.getString("username"));

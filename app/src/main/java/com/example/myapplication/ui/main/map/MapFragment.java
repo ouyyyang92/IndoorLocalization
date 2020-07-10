@@ -167,7 +167,7 @@ public class MapFragment extends Fragment {
                         handler.sendMessage(message);
 
                     }
-                }, 0, 15000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
+                }, 0, 10000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
             }
 
 
