@@ -10,6 +10,7 @@ import android.print.PrinterId;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.main.home.MyPageActivity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,8 +44,9 @@ public class ContactsFragment extends Fragment {
     private ListView lv_contacts;
     private Button btn_search;
     private EditText ed_search;
-    private Activity parent;
+    private MainActivity parent;
     private String searchKey;
+    private Person friend;
 
     public ContactsFragment() {
         // Required empty public constructor
@@ -84,7 +87,7 @@ public class ContactsFragment extends Fragment {
         parent = (MainActivity)getActivity();
         FindView();
         SetListeners();
-        lv_contacts.setAdapter(new ContactsAdapter(inflater));
+//        lv_contacts.setAdapter(new ContactsAdapter(parent,));
         return contentView;
     }
 
@@ -95,17 +98,26 @@ public class ContactsFragment extends Fragment {
     }
 
     private void SetListeners(){
+        lv_contacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //获取用户名
+                Intent intent = new Intent(parent,FriendPageActivity.class);
+                friend = (Person) lv_contacts.getAdapter().getItem(i);
+                intent.putExtras(GetFriendBundle(true));
+                startActivity(intent);
+            }
+        });
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(UserExist()){
                     Intent intent = new Intent(parent,FriendPageActivity.class);
-                    intent.putExtras(GetFriendBundle());
+                    intent.putExtras(GetFriendBundle(IsMyFriend()));
                     startActivity(intent);
                 }else {
                     Toast.makeText(parent,"用户不存在",Toast.LENGTH_SHORT);
                 }
-
             }
         });
     }
@@ -116,20 +128,19 @@ public class ContactsFragment extends Fragment {
     }
 
     private boolean IsMyFriend(){
-
+        friend = new Person();
         return true;
     }
 
-    private Bundle GetFriendBundle(){
+    private Bundle GetFriendBundle(boolean isFriend){
         Bundle bundle = new Bundle();
 
-        if( !IsMyFriend() ){ //不是好友
+        if( isFriend ){ //不是好友
             bundle.putString("state","add a friend");
         }else {
             bundle.putString("state","my friend's page");
         }
 
-        //                Person friend;
 //                bundle.putString("username",friend.getName());
 //                bundle.putString("phone",friend.getPhone());
 //                bundle.putInt("icon",friend.getHeadImg2());
