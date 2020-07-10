@@ -3,12 +3,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".ui.main.contacts.ContactsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="联系人页面" />
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:background="#B1BBBE"
+            android:textSize="35dp"
+            android:text="联系人" />
+
+        <EditText
+            android:id="@+id/editText_search"
+            android:layout_below="@id/textView10"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_search"
+            android:paddingLeft="20dp"
+            android:drawablePadding="20dp"
+            android:hint="输入用户名搜索"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="搜索"
+            android:background="@drawable/bg_btn_normal"
+            android:layout_below="@+id/textView10"/>
+
+        <ListView
+            android:id="@+id/listView_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textView10"
+            android:layout_marginTop="70dp">
+
+        </ListView>
+    </RelativeLayout>
 </FrameLayout>

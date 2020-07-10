@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.data.DateUtils;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Button btn_my_page;
+    private RelativeLayout rl_information;
     private Button btn_information;
     private MainActivity parent;
     private View view;
@@ -98,8 +100,8 @@ public class HomeFragment extends Fragment {
         iv_icon.setImageDrawable(image[parent.GetMe().getHeadImg2()]);
         tv_name = parent.findViewById(R.id.tv_name);
         tv_name.setText(parent.GetMe().getName());
-        btn_information= parent.findViewById(R.id.btn_information);
-        btn_information.setOnClickListener(new View.OnClickListener() {
+        rl_information= parent.findViewById(R.id.relativeLayout_my_page);
+        rl_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
