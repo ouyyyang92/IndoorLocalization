@@ -83,6 +83,7 @@ public class ContactsFragment extends Fragment {
         View contentView = inflater.inflate(R.layout.fragment_contacts, container, false);
         parent = (MainActivity)getActivity();
         FindView();
+        SetListeners();
         lv_contacts.setAdapter(new ContactsAdapter(inflater));
         return contentView;
     }
