@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cilent.Client;
+import com.example.data.DaoHang;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
+import com.example.myapplication.ui.start.LoginActivity;
 import com.example.step.OrientSensor;
 import com.example.step.StepSensorAcceleration;
 import com.example.step.StepSensorBase;
@@ -41,6 +43,7 @@ public class MapFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ImageView iv_location;
+    private ImageView iv_location1;
     private float currentX = 0;
     private float currentY = 0;
     private float newX, newY;
@@ -141,6 +144,9 @@ public class MapFragment extends Fragment {
                 String[] strings5 = strings4[1].split(" ");
                 px = (float) (Integer.parseInt(strings5[0]) * 1000 / 12.0 );
                 py = (float) ((20 - Integer.parseInt(strings5[1])) * 1000 / 12.0 );
+                DaoHang DaoHang = new DaoHang();
+                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
+                Toast.makeText(parent, DaoHang.dh(a,8), Toast.LENGTH_SHORT).show();
             }
             super.handleMessage(msg);
         }
@@ -151,6 +157,7 @@ public class MapFragment extends Fragment {
         newX = px;
         newY = py;
         iv_location = getActivity().findViewById(R.id.imageView_location);
+        iv_location1 =getActivity().findViewById(R.id.imageView_location1);
         button_dingwei = getActivity().findViewById(R.id.button);
         button_dingwei.setOnClickListener(new View.OnClickListener() {
 
@@ -183,11 +190,16 @@ public class MapFragment extends Fragment {
 //                    newY = currentY - (100 - num) / 10;
                     newX = px;
                     newY = py;
+
                     TranslateAnimation translateAnimation = new TranslateAnimation(currentX, newX, currentY, newY);
+                    TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 1000, 0, 0);
 //                    TranslateAnimation translateAnimation = new TranslateAnimation(0, 1000, 0, 0);
                     translateAnimation.setDuration(100);//动画持续时间
+                    translateAnimation1.setDuration(100);
                     iv_location.setAnimation(translateAnimation);
+                    iv_location1.setAnimation(translateAnimation1);
                     translateAnimation.start();
+                    translateAnimation1.start();
                     currentX = newX;
                     currentY = newY;
                     try {
