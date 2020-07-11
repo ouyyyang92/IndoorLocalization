@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cilent.Client;
+import com.example.data.MyData;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
 
@@ -84,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         String message = "";
         if (strings[0].equals("100")) {
             message = "登录成功";
+            MyData.setDengluzhuangtai(1);
             ShowInfoByToast(message);
             personinformation = strings[1];
             Log.d("错误信息",personinformation);
@@ -92,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
             message = "该手机号码未注册";
         } else if (strings[0].equals("102")) {
             message = "密码错误";
+        }else if (strings[0].equals("103")){
+            message = "用户已经登录";
         }
         ShowInfoByToast(message);
         return false;

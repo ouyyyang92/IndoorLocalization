@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cilent.Client;
+import com.example.data.MyData;
 import com.example.myapplication.R;
 
 public class IntroduceActivity extends AppCompatActivity {
@@ -60,10 +62,12 @@ public class IntroduceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                String str1 = "15 "+ place_name.getText().toString();
+                Log.d("错误11",str1);
                String str2 = Client.send(str1);
+               Log.d("错误22",str2);
                String[] strings = str2.split("/");
-               bianhao = Integer.parseInt(strings[2]);
-
+               bianhao = Integer.parseInt(strings[1]);
+                MyData.setBiaohao(bianhao);
             }
         });
     }

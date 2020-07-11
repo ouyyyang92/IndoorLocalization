@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.cilent.Client;
 import com.example.data.DaoHang;
+import com.example.data.MyData;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.start.LoginActivity;
@@ -48,6 +49,9 @@ public class MapFragment extends Fragment {
     private float currentX = 0;
     private float currentY = 0;
     private float newX, newY;
+    private float friendCurrentX = 0;
+    private float friendCurrentY = 0;
+    private float friendNewX, friendNewY;
     private MainActivity parent;
     private Button button_dingwei;
     // TODO: Rename and change types of parameters
@@ -55,6 +59,7 @@ public class MapFragment extends Fragment {
     private String mParam2;
     private int[] AP = new int[6];
     public float px, py;
+    public float friendPx=0,friendPy=0;
     private Timer mTimer;   // 启动定时任务的对象
     private final int SAMPLE_RATE = 2000; // 采样周期，以毫秒为单位，两秒一次
     private String str1;
@@ -141,15 +146,25 @@ public class MapFragment extends Fragment {
                     }
                 }
                 String name = parent.GetMe().getName();
-                str1 = "3 " + name +" "+ AP[0] + " " + AP[1] + " " + AP[2] + " " + AP[3] + " " + AP[4] + " " + AP[5];
+                int id = MyData.getId();
+                str1 = "3 " + name +" "+ AP[0] + " " + AP[1] + " " + AP[2] + " " + AP[3] + " " + AP[4] + " " + AP[5]+" "+id;
                 String str2 = Client.send(str1);
                 String[] strings4 = str2.split("/");
                 String[] strings5 = strings4[1].split(" ");
                 px = (float) (Integer.parseInt(strings5[0]) * 1000 / 12.0 );
                 py = (float) ((20 - Integer.parseInt(strings5[1])) * 1000 / 12.0 );
+                if (!strings5[2].equals("-1")&&!strings5[3].equals("-1")) {
+                    friendPx = (float) (Integer.parseInt(strings5[2]) * 1000 / 12.0);
+                    friendPy = (float) ((20 - Integer.parseInt(strings5[3])) * 1000 / 12.0);
+                }
+
 //                DaoHang DaoHang = new DaoHang();
+//                int bianhao = MyData.getBiaohao();
 //                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
-//                Toast.makeText(parent, DaoHang.dh(a,8), Toast.LENGTH_SHORT).show();
+//                if (bianhao!=-1 && a!=bianhao){
+//                    Toast.makeText(parent, DaoHang.dh(a,MyData.getBiaohao()), Toast.LENGTH_SHORT).show();
+//                }
+
             }
             super.handleMessage(msg);
         }
@@ -159,6 +174,8 @@ public class MapFragment extends Fragment {
         parent = (MainActivity) getActivity();
         newX = px;
         newY = py;
+        friendNewX =friendPx;
+        friendNewY =friendPy;
         iv_location = getActivity().findViewById(R.id.imageView_location);
         iv_location1 =getActivity().findViewById(R.id.imageView_location1);
         btn_place[1]=getActivity().findViewById(R.id.btn_kitchen);
@@ -183,9 +200,11 @@ public class MapFragment extends Fragment {
                         Message message = new Message();
                         message.what = 1;
                         handler.sendMessage(message);
-
+                        if (MyData.getDengluzhuangtai()==0){
+                            message.what = 0;
+                        }
                     }
-                }, 0, 5000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
+                }, 0, 10000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
             }
 
 
@@ -201,9 +220,11 @@ public class MapFragment extends Fragment {
 //                    newY = currentY - (100 - num) / 10;
                     newX = px;
                     newY = py;
+                    friendNewX = friendPx;
+                    friendNewY = friendPy;
 
                     TranslateAnimation translateAnimation = new TranslateAnimation(currentX, newX, currentY, newY);
-                    TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 1000, 0, 0);
+                    TranslateAnimation translateAnimation1 = new TranslateAnimation(friendCurrentX, friendNewX, friendCurrentY, friendNewY);
 //                    TranslateAnimation translateAnimation = new TranslateAnimation(0, 1000, 0, 0);
                     translateAnimation.setDuration(100);//动画持续时间
                     translateAnimation1.setDuration(100);
@@ -213,6 +234,8 @@ public class MapFragment extends Fragment {
                     translateAnimation1.start();
                     currentX = newX;
                     currentY = newY;
+                    friendCurrentX = friendNewX;
+                    friendCurrentY = friendNewY;
                     try {
                         Thread.sleep(100);//线程持续时间
                     } catch (InterruptedException e) {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cilent.Client;
+import com.example.data.MyData;
 import com.example.myapplication.R;
 
 public class FriendPageActivity extends AppCompatActivity {
@@ -76,7 +77,12 @@ public class FriendPageActivity extends AppCompatActivity {
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FriendPageActivity.this,"敬请期待",Toast.LENGTH_SHORT).show();
+                String username = tv_username.getText().toString();
+                String str1 = "16 " + username;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                MyData.setId(Integer.parseInt(strings[1]));
+//                Toast.makeText(FriendPageActivity.this,"敬请期待",Toast.LENGTH_SHORT).show();
             }
         });
     }

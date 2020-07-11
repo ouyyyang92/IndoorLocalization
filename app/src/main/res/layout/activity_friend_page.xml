@@ -131,7 +131,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:drawablePadding="10dp"
-        android:text="发送消息" />
+        android:text="位置共享" />
 
     <Button
         android:id="@+id/button_add_friend"

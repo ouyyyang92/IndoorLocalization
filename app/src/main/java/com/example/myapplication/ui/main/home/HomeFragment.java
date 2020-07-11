@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.cilent.Client;
 import com.example.data.DateUtils;
+import com.example.data.MyData;
 import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.MainActivity;
@@ -159,6 +160,7 @@ public class HomeFragment extends Fragment {
                 String name = parent.GetMe().getName();
                 String string = "13 " + name;
                 Client.send(string);
+                MyData.setDengluzhuangtai(0);
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
