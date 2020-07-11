@@ -65,7 +65,7 @@ public class DaoHang {
                 result=result+"右下卧室";
                 break;
             case 8:
-                result=result+"阳台";
+                result=result+"右下角阳台";
                 break;
             case 0:
                 result=result+"走廊";
@@ -96,7 +96,7 @@ public class DaoHang {
                     result=result+"-->右下卧室";
                     break;
                 case 8:
-                    result=result+"-->阳台";
+                    result=result+"-->右下角阳台";
                     break;
                 case 9:
                     result=result+"-->走廊西";

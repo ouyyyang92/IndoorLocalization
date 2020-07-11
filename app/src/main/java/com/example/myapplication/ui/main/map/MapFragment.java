@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.main.map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class MapFragment extends Fragment {
     private final int SAMPLE_RATE = 2000; // 采样周期，以毫秒为单位，两秒一次
     private String str1;
     private WifiManager wm;
+    private Button[] btn_place = new Button[9];
 
     public MapFragment() {
         // Required empty public constructor
@@ -87,6 +89,7 @@ public class MapFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -144,9 +147,9 @@ public class MapFragment extends Fragment {
                 String[] strings5 = strings4[1].split(" ");
                 px = (float) (Integer.parseInt(strings5[0]) * 1000 / 12.0 );
                 py = (float) ((20 - Integer.parseInt(strings5[1])) * 1000 / 12.0 );
-                DaoHang DaoHang = new DaoHang();
-                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
-                Toast.makeText(parent, DaoHang.dh(a,8), Toast.LENGTH_SHORT).show();
+//                DaoHang DaoHang = new DaoHang();
+//                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
+//                Toast.makeText(parent, DaoHang.dh(a,8), Toast.LENGTH_SHORT).show();
             }
             super.handleMessage(msg);
         }
@@ -158,6 +161,14 @@ public class MapFragment extends Fragment {
         newY = py;
         iv_location = getActivity().findViewById(R.id.imageView_location);
         iv_location1 =getActivity().findViewById(R.id.imageView_location1);
+        btn_place[1]=getActivity().findViewById(R.id.btn_kitchen);
+        btn_place[2]=getActivity().findViewById(R.id.btn_dining_hall);
+        btn_place[3]=getActivity().findViewById(R.id.btn_left_room1);
+        btn_place[4]=getActivity().findViewById(R.id.btn_right_room1);
+        btn_place[5]=getActivity().findViewById(R.id.btn_living_room);
+        btn_place[6]=getActivity().findViewById(R.id.btn_left_room2);
+        btn_place[7]=getActivity().findViewById(R.id.btn_right_room2);
+        btn_place[8]=getActivity().findViewById(R.id.btn_balcony);
         button_dingwei = getActivity().findViewById(R.id.button);
         button_dingwei.setOnClickListener(new View.OnClickListener() {
 
@@ -217,7 +228,156 @@ public class MapFragment extends Fragment {
 
             }
         }).start();
+        btn_place[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "厨房" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","厨房");
+                bundle.putInt("num",1);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
+        btn_place[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "饭厅" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","饭厅");
+                bundle.putInt("num",2);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btn_place[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "左上卧室" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","左上卧室");
+                bundle.putInt("num",3);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btn_place[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "右上卧室" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","右上卧室");
+                bundle.putInt("num",4);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        btn_place[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "客厅" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","客厅");
+                bundle.putInt("num",5);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btn_place[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "左下卧室" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","左下卧室");
+                bundle.putInt("num",6);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btn_place[7].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "右下卧室" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","右下卧室");
+                bundle.putInt("num",7);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btn_place[8].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent();
+                intent.setClass(getActivity(),IntroduceActivity.class);
+                Bundle bundle=new Bundle();
+                String str1 = "14 "+ "阳台" ;
+                String str2 = Client.send(str1);
+                String[] strings = str2.split("/");
+                String[] strings1 = strings[1].split(" ");
+                bundle.putString("introduce",strings1[0]);
+                bundle.putString("pingjia",strings1[1]);
+                bundle.putString("name","阳台");
+                bundle.putInt("num",8);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
 }

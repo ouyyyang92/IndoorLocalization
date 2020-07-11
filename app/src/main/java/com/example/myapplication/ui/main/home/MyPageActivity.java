@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -104,12 +105,17 @@ public class MyPageActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode) {
-            case RESULT_OK:
-                ChangeInfo(data.getExtras());
-                tv_phone.setText(bundle.getString("phone"));
-                tv_hobbies.setText(bundle.getString("hobbies"));
-                break;
+        ChangeInfo(data.getExtras());
+        Log.d("个人信息",data.getExtras().getString("username"));
+        tv_phone.setText(bundle.getString("phone"));
+        tv_hobbies.setText(bundle.getString("hobbies"));
+        switch (requestCode) {
+//            case RESULT_OK:
+//                ChangeInfo(data.getExtras());
+//                Log.d("个人信息",data.getExtras().getString("username"));
+//                tv_phone.setText(bundle.getString("phone"));
+//                tv_hobbies.setText(bundle.getString("hobbies"));
+//                break;
             default:
                 break;
         }

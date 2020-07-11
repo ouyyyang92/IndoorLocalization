@@ -81,7 +81,7 @@ public class ModifyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearFocusOfEditText();
-                Intent intent = new Intent(ModifyActivity.this, MyPageActivity.class);
+                Intent intent = new Intent();
                 String str1 = "12 " + beforeName + " " + et_name.getText().toString() + " " + icon + " " + gender + " " +
                         Birth_toString() + " " + et_location.getText().toString() + " " + et_email.getText().toString();
                 String str2 = Client.send(str1);
@@ -109,15 +109,16 @@ public class ModifyActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 ClearFocusOfEditText();
                 RadioButton rb = findViewById(i);
+                Log.d("按钮编号",i%3+"");
                 switch (i % 3) {
                     case 0:
-                        gender = 1;
-                        break;
-                    case 1:
                         gender = 0;
                         break;
-                    case 2:
+                    case 1:
                         gender = 2;
+                        break;
+                    case 2:
+                        gender = 1;
                         break;
                 }
             }
@@ -231,12 +232,13 @@ public class ModifyActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         assert bundle != null;
-        bundle.putInt("username", Integer.parseInt(et_name.getText().toString()));
+        bundle.putString("username", et_name.getText().toString());
         bundle.putInt("icon", icon);
         bundle.putInt("gender", gender);
         bundle.putString("birth", Birth_toString());
         bundle.putString("address",et_location.getText().toString());
         bundle.putString("email",et_email.getText().toString());
+        Log.d("个人姓名",et_name.getText().toString());
         return bundle;
     }
     private void ClearFocusOfEditText(){

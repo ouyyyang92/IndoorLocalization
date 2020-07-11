@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cilent.Client;
+import com.example.data.ClientUtils;
 import com.example.data.DateUtils;
 import com.example.data.Person;
 import com.example.myapplication.R;
@@ -118,7 +120,7 @@ public class ContactsFragment extends Fragment {
                     intent.putExtras(GetFriendBundle(IsMyFriend()));
                     startActivity(intent);
                 }else {
-                    Toast.makeText(parent,"用户不存在",Toast.LENGTH_SHORT);
+                    Toast.makeText(parent,"用户不存在",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -126,17 +128,26 @@ public class ContactsFragment extends Fragment {
 
     private boolean UserExist(){
         searchKey = ed_search.getText().toString();
-        return true;
+        String str1 = "6 "+ searchKey;
+        String str2 = Client.send(str1);
+        String[] str3 =  str2.split("/");
+        if (str3[0].equals("501")){
+            return false;
+        }
+        else {
+            friend = ClientUtils.stringToPerson(str3[1]);
+            return true;
+        }
     }
 
     private boolean IsMyFriend(){
-        friend = new Person();
-        return true;
+
+        return false;
     }
 
     private Bundle GetFriendBundle(boolean isFriend){
         Bundle bundle = new Bundle();
-
+        bundle.putString("myname",parent.GetMe().getName());
         if( !isFriend ){ //不是好友
             bundle.putString("state","add a friend");
         }else {

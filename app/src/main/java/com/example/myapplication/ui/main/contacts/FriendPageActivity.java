@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cilent.Client;
 import com.example.myapplication.R;
 
 public class FriendPageActivity extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class FriendPageActivity extends AppCompatActivity {
     private ImageView iv_gender;
     private Drawable[] image = new Drawable[6];
     private Drawable[] genderImage = new Drawable[2];
+    private String myname ;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -67,7 +69,6 @@ public class FriendPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AddAsFriend();
-                Toast.makeText(FriendPageActivity.this,"已发送请求",Toast.LENGTH_SHORT).show();
                 //
 
             }
@@ -84,6 +85,7 @@ public class FriendPageActivity extends AppCompatActivity {
     private void LoadInfo(){
         Bundle bundle = getIntent().getExtras();
         LoadImage();
+        myname = bundle.getString("myname");
         Log.d("错误信息333",bundle.getString("username"));
         tv_username.setText(bundle.getString("username"));
         tv_phone.setText(bundle.getString("phone"));
@@ -128,5 +130,25 @@ public class FriendPageActivity extends AppCompatActivity {
 
     private void AddAsFriend(){
         String username = tv_username.getText().toString();
+        String str1 = "7 " + myname +" " + username;
+        String str2 = Client.send(str1);
+        String[] strings = str2.split("/");
+        if (strings[0].equals("400")){
+            Toast.makeText(FriendPageActivity.this,"已发送请求",Toast.LENGTH_SHORT).show();
+        }
+        else if (strings[0].equals("401")){
+            Toast.makeText(FriendPageActivity.this,"该用户已是您的好友",Toast.LENGTH_SHORT).show();
+        }
+        else if (strings[0].equals("402")){
+            Toast.makeText(FriendPageActivity.this,"已发出过申请",Toast.LENGTH_SHORT).show();
+        }
+        else if (strings[0].equals("403")){
+            Toast.makeText(FriendPageActivity.this,"不能向自己发送好友请求",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(FriendPageActivity.this,"未知错误",Toast.LENGTH_SHORT).show();
+
+        }
     }
+
 }

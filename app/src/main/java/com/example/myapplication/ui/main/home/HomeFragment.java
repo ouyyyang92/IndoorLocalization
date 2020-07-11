@@ -143,8 +143,12 @@ public class HomeFragment extends Fragment {
         btn_friends_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 ="8 "+parent.GetMe().getName();
+                String str2 = Client.send(str1);
+//                String[] strings = str2.split("/");
                 Intent intent = new Intent(parent, RequestActivity.class);
                 intent.putExtra("username", parent.GetMe().getName());
+                intent.putExtra("friendrequest",str2);
                 startActivity(intent);
             }
         });

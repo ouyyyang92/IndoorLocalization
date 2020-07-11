@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.cilent.Client;
 import com.example.data.Person;
 import com.example.myapplication.R;
 import com.google.android.gms.common.api.Api;
@@ -25,6 +26,7 @@ public class RequestAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private String myName;
     private Drawable[] image;
+    private String fromname;
 
     public RequestAdapter(Context context, List<Person> requests, String myName) {
         this.context = context;
@@ -53,7 +55,7 @@ public class RequestAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         RequestViewHolder holder = null;
         if (view == null) {
-            view = inflater.inflate(R.layout.layout_contacts_item, null);
+            view = inflater.inflate(R.layout.layout_request_item, null);
             holder = new RequestViewHolder();
             holder.iv_icon = view.findViewById(R.id.imageView_icon);
             holder.tv_username = view.findViewById(R.id.textView_username);
@@ -70,9 +72,12 @@ public class RequestAdapter extends BaseAdapter {
         holder.iv_icon.setImageDrawable(image[requests.get(i).getHeadImg2()]);
         holder.tv_username.setText(requests.get(i).getName());
         final RequestViewHolder finalHolder = holder;
+        fromname = requests.get(i).getName();
         holder.btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 = "9 " + fromname +" " +myName;
+                Client.send(str1);
                 finalHolder.btn_accept.setVisibility(View.INVISIBLE);
                 finalHolder.btn_reject.setVisibility(View.INVISIBLE);
                 finalHolder.tv_hint.setVisibility(View.VISIBLE);
@@ -81,6 +86,8 @@ public class RequestAdapter extends BaseAdapter {
         holder.btn_reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 = "10 " + fromname +" " +myName;
+                Client.send(str1);
                 finalHolder.btn_accept.setVisibility(View.INVISIBLE);
                 finalHolder.btn_reject.setVisibility(View.INVISIBLE);
                 finalHolder.tv_hint.setVisibility(View.VISIBLE);
@@ -91,6 +98,7 @@ public class RequestAdapter extends BaseAdapter {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void LoadImage() {
+        image = new Drawable[6];
         image[0] = context.getDrawable(R.drawable.ic_headimage_1);
         image[1] = context.getDrawable(R.drawable.ic_headimage_2);
         image[2] = context.getDrawable(R.drawable.ic_headimage_3);

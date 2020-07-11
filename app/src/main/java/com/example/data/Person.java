@@ -27,6 +27,11 @@ public class Person {
 		super();
 	}
 
+	public Person(String name, int headImg2) {
+		this.name = name;
+		this.headImg2 = headImg2;
+	}
+
 	public Person(String phone, String password, String name, Date creatDate) {
 		super();
 		this.phone = phone;

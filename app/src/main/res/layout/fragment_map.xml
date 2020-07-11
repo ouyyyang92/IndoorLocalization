@@ -24,7 +24,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageView_location"
@@ -61,17 +61,112 @@
             app:layout_constraintTop_toTopOf="@+id/imageView3"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <Button
-            android:id="@+id/button_daohang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="导航"
+            android:id="@+id/btn_kitchen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.594"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="0.078" />
+            app:layout_constraintVertical_bias="0.248"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_dining_hall"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.944"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.2"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_left_room1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.231"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.428"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_left_room2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.843"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_right_room1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="56dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.412"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.429"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_right_room2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
+            app:layout_constraintHorizontal_bias="0.642"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.933"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_living_room"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.863"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.475"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_balcony"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="52dp"
+            android:background="@drawable/button1"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.813"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
