@@ -37,8 +37,9 @@ public class MyPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_page);
         bundle = getIntent().getExtras();
         FindView();
+        LoadImage();
         SetListeners();
-        ChangeInfo();
+        ChangeInfo(getIntent().getExtras());
     }
 
     private void FindView() {
@@ -74,9 +75,7 @@ public class MyPageActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void ChangeInfo(){
-        Bundle bundle = getIntent().getExtras();
-        LoadImage();
+    private void ChangeInfo(Bundle bundle) {
         tv_username.setText(bundle.getString("username"));
         tv_phone.setText(bundle.getString("phone"));
         tv_birth.setText(bundle.getString("birth"));
@@ -84,7 +83,7 @@ public class MyPageActivity extends AppCompatActivity {
         tv_hobbies.setText(bundle.getString("hobbies"));
         tv_location.setText(bundle.getString("address"));
         iv_icon.setImageDrawable(image[bundle.getInt("icon")]);
-        if(bundle.getInt("gender") != 2 ){
+        if (bundle.getInt("gender") != 2) {
             iv_gender.setImageDrawable(genderImage[bundle.getInt("gender")]);
         }
     }
@@ -101,19 +100,19 @@ public class MyPageActivity extends AppCompatActivity {
         genderImage[1] = getDrawable(R.drawable.ic_female_show);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case RESULT_OK:
-                ModifyInformation(data.getExtras());
+                ChangeInfo(data.getExtras());
+                tv_phone.setText(bundle.getString("phone"));
+                tv_hobbies.setText(bundle.getString("hobbies"));
                 break;
             default:
                 break;
         }
     }
 
-    private void ModifyInformation(Bundle newBundle) {
-
-    }
 }

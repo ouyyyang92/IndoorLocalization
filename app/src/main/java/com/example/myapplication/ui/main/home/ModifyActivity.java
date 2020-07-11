@@ -44,8 +44,8 @@ public class ModifyActivity extends AppCompatActivity {
         FindView();
         SetListener();
         birth_year = 2000;
-        birth_month = 01;
-        birth_day = 01;
+        birth_month = 1;
+        birth_day = 1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
