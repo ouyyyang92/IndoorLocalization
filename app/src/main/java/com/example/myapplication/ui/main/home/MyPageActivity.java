@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.home;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +29,7 @@ public class MyPageActivity extends AppCompatActivity {
     private Drawable[] image = new Drawable[6];
     private Drawable[] genderImage = new Drawable[2];
     private Button button_edit;
-    Bundle bundle;
+    private Bundle bundle;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +38,7 @@ public class MyPageActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         FindView();
         SetListeners();
-
         ChangeInfo();
-
     }
 
     private void FindView() {
@@ -68,8 +67,8 @@ public class MyPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent();
                 intent.setClass(MyPageActivity.this,ModifyActivity.class);
-                intent.putExtra("username",tv_username.getText().toString());
-                startActivity(intent);
+                intent.putExtra("username", tv_username.getText().toString());
+                startActivityForResult(intent, RESULT_OK);
             }
         });
     }
@@ -91,7 +90,7 @@ public class MyPageActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void LoadImage(){
+    private void LoadImage() {
         image[0] = getDrawable(R.drawable.ic_headimage_1);
         image[1] = getDrawable(R.drawable.ic_headimage_2);
         image[2] = getDrawable(R.drawable.ic_headimage_3);
@@ -100,5 +99,21 @@ public class MyPageActivity extends AppCompatActivity {
         image[5] = getDrawable(R.drawable.ic_headimage_6);
         genderImage[0] = getDrawable(R.drawable.ic_male_show);
         genderImage[1] = getDrawable(R.drawable.ic_female_show);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_OK:
+                ModifyInformation(data.getExtras());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ModifyInformation(Bundle newBundle) {
+
     }
 }

@@ -82,15 +82,16 @@ public class ModifyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ClearFocusOfEditText();
                 Intent intent = new Intent(ModifyActivity.this, MyPageActivity.class);
-                String str1 = "12 "+ beforeName+" " +et_name.getText().toString() + " " +icon +" " + gender +" " +
-                        Birth_toString() + " " + et_location.getText().toString() + " " +et_email.getText().toString();
+                String str1 = "12 " + beforeName + " " + et_name.getText().toString() + " " + icon + " " + gender + " " +
+                        Birth_toString() + " " + et_location.getText().toString() + " " + et_email.getText().toString();
                 String str2 = Client.send(str1);
                 String[] str3 = str2.split("/");
-                if (str3[0].equals("202")){
-                    Toast.makeText(ModifyActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                if (str3[0].equals("202")) {
+                    Toast.makeText(ModifyActivity.this, "用户名已存在", Toast.LENGTH_SHORT).show();
                 }
                 intent.putExtras(GetInformationBundle());
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
         iv_head_icon.setOnClickListener(new View.OnClickListener() {
