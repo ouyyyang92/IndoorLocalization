@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 
@@ -15,6 +16,7 @@ public class FindPasswordActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_password);
         FindView();
+        Toast.makeText(FindPasswordActivity1.this,"敬请期待",Toast.LENGTH_LONG).show();
     }
 
     private void FindView(){
@@ -25,5 +27,6 @@ public class FindPasswordActivity1 extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 }

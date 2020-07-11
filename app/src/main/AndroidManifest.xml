@@ -22,7 +22,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ui.main.home.RequestActivity"></activity>
         <activity android:name=".ui.main.contacts.FriendPageActivity" />
-        <activity android:name=".ui.main.home.MyPageActivity" />
+        <activity android:name=".ui.main.home.MyPageActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.main.map.IntroduceActivity" />
         <activity android:name=".ui.start.findPassword.FindPasswordActivity1" />

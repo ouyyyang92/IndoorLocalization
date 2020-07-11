@@ -5,6 +5,7 @@ public class MyData {
     private static int biaohao = -1;
     private static int dengluzhuangtai =0;
 
+
     public static int getId() {
         return id;
     }

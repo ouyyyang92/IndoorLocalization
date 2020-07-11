@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cilent.Client;
 import com.example.data.MyData;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.main.contacts.FriendPageActivity;
 
 public class IntroduceActivity extends AppCompatActivity {
     private Button btn_back2,btn_navigation;
@@ -68,6 +70,7 @@ public class IntroduceActivity extends AppCompatActivity {
                String[] strings = str2.split("/");
                bianhao = Integer.parseInt(strings[1]);
                 MyData.setBiaohao(bianhao);
+                Toast.makeText(IntroduceActivity.this,"已开启导航，请回地图界面查看",Toast.LENGTH_SHORT).show();
             }
         });
     }

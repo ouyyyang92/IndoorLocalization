@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.ui.start.LoginActivity;
@@ -31,6 +32,9 @@ public class MyPageActivity extends AppCompatActivity {
     private Drawable[] genderImage = new Drawable[2];
     private Button button_edit;
     private Bundle bundle;
+    private int icon;
+    private String username;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,15 @@ public class MyPageActivity extends AppCompatActivity {
         LoadImage();
         SetListeners();
         ChangeInfo(getIntent().getExtras());
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.d("onNewIntent","sss");
+        ChangeInfo(intent.getExtras());
     }
 
     private void FindView() {
@@ -61,16 +74,24 @@ public class MyPageActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putInt("icon",icon);
+                bundle.putString("username",username);
+                intent.putExtras(bundle);
+                setResult(100,intent);
                 finish();
             }
         });
         button_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.setClass(MyPageActivity.this,ModifyActivity.class);
-                intent.putExtra("username", tv_username.getText().toString());
-                startActivityForResult(intent, RESULT_OK);
+//                Intent intent=new Intent();
+//                intent.setClass(MyPageActivity.this,ModifyActivity.class);
+//                intent.putExtra("username", tv_username.getText().toString());
+////                startActivityForResult(intent, RESULT_OK);
+//                startActivity(intent);
+                Toast.makeText(MyPageActivity.this,"未完善",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -87,6 +108,8 @@ public class MyPageActivity extends AppCompatActivity {
         if (bundle.getInt("gender") != 2) {
             iv_gender.setImageDrawable(genderImage[bundle.getInt("gender")]);
         }
+        icon = bundle.getInt("icon");
+        username = bundle.getString("username");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -90,8 +90,9 @@ public class ModifyActivity extends AppCompatActivity {
                     Toast.makeText(ModifyActivity.this, "用户名已存在", Toast.LENGTH_SHORT).show();
                 }
                 intent.putExtras(GetInformationBundle());
-                setResult(RESULT_OK, intent);
-                finish();
+//                setResult(RESULT_OK, intent);
+                intent.setClass(ModifyActivity.this,MyPageActivity.class);
+                startActivity(intent);
             }
         });
         iv_head_icon.setOnClickListener(new View.OnClickListener() {

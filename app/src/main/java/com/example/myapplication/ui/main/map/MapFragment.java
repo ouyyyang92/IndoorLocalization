@@ -158,12 +158,16 @@ public class MapFragment extends Fragment {
                     friendPy = (float) ((20 - Integer.parseInt(strings5[3])) * 1000 / 12.0);
                 }
 
-//                DaoHang DaoHang = new DaoHang();
-//                int bianhao = MyData.getBiaohao();
-//                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
-//                if (bianhao!=-1 && a!=bianhao){
-//                    Toast.makeText(parent, DaoHang.dh(a,MyData.getBiaohao()), Toast.LENGTH_SHORT).show();
-//                }
+                DaoHang DaoHang = new DaoHang();
+                int bianhao = MyData.getBiaohao();
+                int a = DaoHang.location(Integer.parseInt(strings5[0]),Integer.parseInt(strings5[1]));
+                if (bianhao!=-1 && a!=bianhao){
+                    Toast.makeText(parent, DaoHang.dh(a,MyData.getBiaohao()), Toast.LENGTH_SHORT).show();
+                }
+                else if(a ==bianhao) {
+                    MyData.setBiaohao(-1);
+                    Toast.makeText(parent, "导航完成，祝您生活愉快!", Toast.LENGTH_SHORT).show();
+                }
 
             }
             super.handleMessage(msg);
@@ -204,7 +208,7 @@ public class MapFragment extends Fragment {
                             message.what = 0;
                         }
                     }
-                }, 0, 10000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
+                }, 0, 7000); // 立即执行任务，每隔5000ms执行一次WiFi扫描的任务
             }
 
 
@@ -214,6 +218,7 @@ public class MapFragment extends Fragment {
             @Override
             public void run() {
 //                int num = 0;
+                int count = 0;
                 while (true) {
 //                    num++;
 //                    newX = currentX + (100 - num) / 10;
@@ -232,6 +237,13 @@ public class MapFragment extends Fragment {
                     iv_location1.setAnimation(translateAnimation1);
                     translateAnimation.start();
                     translateAnimation1.start();
+//                    if (newX == currentX && newY == currentY ){
+//                        count++;
+//                    }
+//                    else count =0;
+//                    if (count == 150){
+//                        Toast.makeText(parent,)
+//                    }
                     currentX = newX;
                     currentY = newY;
                     friendCurrentX = friendNewX;

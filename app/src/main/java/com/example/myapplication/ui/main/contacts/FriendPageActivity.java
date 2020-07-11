@@ -82,7 +82,7 @@ public class FriendPageActivity extends AppCompatActivity {
                 String str2 = Client.send(str1);
                 String[] strings = str2.split("/");
                 MyData.setId(Integer.parseInt(strings[1]));
-//                Toast.makeText(FriendPageActivity.this,"敬请期待",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FriendPageActivity.this,"已开启位置共享,请回地图界面查看",Toast.LENGTH_SHORT).show();
             }
         });
     }

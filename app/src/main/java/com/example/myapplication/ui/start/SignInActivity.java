@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.cilent.Client;
+import com.example.data.MyData;
 import com.example.myapplication.ui.main.MainActivity;
 import com.example.myapplication.ui.start.leading.BasicInfoActivity;
 import com.example.myapplication.R;
@@ -343,6 +344,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (flag2){
                         ShowInfoByToast("注册成功！");
+                        MyData.setDengluzhuangtai(1);
                         Intent intent = new Intent(SignInActivity.this, BasicInfoActivity.class);
                         //创建新Activity的同时清空站内所有Activities
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

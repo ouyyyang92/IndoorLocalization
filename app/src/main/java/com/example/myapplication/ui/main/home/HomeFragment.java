@@ -5,10 +5,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +138,7 @@ public class HomeFragment extends Fragment {
                 } else bundle.putString("birth", DateUtils.udateToString(me.getBornDate()));
 
                 intent.putExtras(bundle);
-                getActivity().startActivity(intent);
+                getActivity().startActivityForResult(intent,100);
 
             }
         });
@@ -178,4 +180,11 @@ public class HomeFragment extends Fragment {
         image[5] = parent.getDrawable(R.drawable.ic_headimage_6);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("HomeFragment","onActivityResult()");
+        iv_icon.setImageDrawable(image[data.getExtras().getInt("icon")]);
+        tv_name.setText(data.getExtras().getString("username"));
+    }
 }
