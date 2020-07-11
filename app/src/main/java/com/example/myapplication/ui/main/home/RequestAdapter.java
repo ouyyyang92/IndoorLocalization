@@ -76,6 +76,8 @@ public class RequestAdapter extends BaseAdapter {
         holder.btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 = "9" + " " + finalHolder.tv_username.getText().toString() + " " + myName;
+                Client.send(str1);
                 finalHolder.btn_accept.setVisibility(View.INVISIBLE);
                 finalHolder.btn_reject.setVisibility(View.INVISIBLE);
                 finalHolder.tv_hint.setVisibility(View.VISIBLE);
@@ -84,6 +86,8 @@ public class RequestAdapter extends BaseAdapter {
         holder.btn_reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 = "10" + " " + finalHolder.tv_username.getText().toString() + " " + myName;
+                Client.send(str1);
                 finalHolder.btn_accept.setVisibility(View.INVISIBLE);
                 finalHolder.btn_reject.setVisibility(View.INVISIBLE);
                 finalHolder.tv_hint.setVisibility(View.VISIBLE);

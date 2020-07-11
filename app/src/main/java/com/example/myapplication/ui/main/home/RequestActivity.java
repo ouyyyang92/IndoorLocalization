@@ -32,7 +32,7 @@ public class RequestActivity extends AppCompatActivity {
         FindView();
         lv_request.setAdapter(new RequestAdapter(this, personList, getIntent().getStringExtra("username")));
         SetListeners();
-        FindItemButton();
+//        FindItemButton();
     }
 
     private void FindView() {
