@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import com.example.cilent.Client;
 import com.example.data.ClientUtils;
 import com.example.data.DateUtils;
+import com.example.data.MyData;
 import com.example.data.Person;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.main.contacts.ContactsFragment;
@@ -97,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d("错误","sss");
 
     }
+
+//    @Override
+//    protected void onDestroy() {
+//
+//
+//        super.onDestroy();
+//        String string = "13 " + me.getName();
+//        String string1 = Client.send(string);
+//        MyData.setDengluzhuangtai(0);
+//        Log.d("MainActivity","onDestory");
+//        Log.d("错误111111",string);
+//        Log.d("错误222222",string1);
+//    }
 
     private class OnClicked implements View.OnClickListener {
         private Fragment fragment;

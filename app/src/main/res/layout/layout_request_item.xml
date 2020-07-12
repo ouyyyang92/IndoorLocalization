@@ -50,7 +50,7 @@
 
         <TextView
             android:id="@+id/textView_hint"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="已处理！"
             android:layout_toRightOf="@id/textView_username"
